@@ -182,7 +182,7 @@ export default {
     })
 
     getVisitByWeek().then(response => {
-      if (response.code === this.$ECode.SUCCESS) {
+      if (response.code === 200) {
         var visitByWeek = response.data
         var lineChartData = {
           date: visitByWeek.date,
