@@ -93,7 +93,7 @@ export default {
       params.currentPage = 1;
       params.pageSize = 30;
       getList(params).then(response => {
-        if (response.code == this.$ECode.SUCCESS) {
+        if (response.code === 200) {
           this.todos = response.data.records;
         }
       });
@@ -106,7 +106,7 @@ export default {
         var params = {};
         params.text = text.trim();
         addTodo(params).then(response => {
-          if (response.code == this.$ECode.SUCCESS) {
+          if (response.code === 200) {
             this.getTodoList();
           }
         });
@@ -121,7 +121,7 @@ export default {
       params.uid = val.uid;
       params.text = val.text;
       editTodo(params).then(response => {
-        if (response.code == this.$ECode.SUCCESS) {
+        if (response.code === 200) {
           this.getTodoList()
         }
       });
@@ -131,7 +131,7 @@ export default {
       var params = {};
       params.uid = todo.uid;
       deleteTodo(params).then(response => {
-        if (response.code == this.$ECode.SUCCESS) {
+        if (response.code === 200) {
           this.getTodoList();
         }
       });
@@ -142,7 +142,7 @@ export default {
       params.uid = todo.uid;
       params.text = value.trim();
       editTodo(params).then(response => {
-        if (response.code == this.$ECode.SUCCESS) {
+        if (response.code === 200) {
           this.getTodoList();
         }
       });
@@ -159,7 +159,7 @@ export default {
       var params = {};
       params.done = done;
       toggleAll(params).then(response => {
-        if (response.code == this.$ECode.SUCCESS) {
+        if (response.code === 200) {
           this.getTodoList();
         }
       });

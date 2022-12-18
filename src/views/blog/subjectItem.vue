@@ -153,7 +153,7 @@
             params.append('subjectUid', this.subjectUid)
             params.append('isDesc', isDesc)
             sortByCreateTime(params).then(response => {
-              if (response.code == this.$ECode.SUCCESS) {
+              if (response.code === 200) {
                 this.$commonUtil.message.success(response.message)
                 this.getList();
               } else {
@@ -172,7 +172,7 @@
         params.pageSize = 100;
         params.currentPage = 1;
         getSubjectItemList(params).then(response => {
-          if(response.code == this.$ECode.SUCCESS) {
+          if(response.code === 200) {
             this.list = response.data.records
             this.total = response.total
             this.$nextTick(() => {
@@ -195,7 +195,7 @@
             params.uid = row.uid;
             let subjectItemList = [params]
             deleteBatchSubjectItem(subjectItemList).then(response => {
-              if(response.code == this.$ECode.SUCCESS) {
+              if(response.code === 200) {
                 this.$commonUtil.message.success(response.message)
               } else {
                 this.$commonUtil.message.error(response.message)
@@ -232,7 +232,7 @@
               subjectList.push(params)
             }
             editSubjectItem(subjectList).then(response => {
-              if(response.code == this.$ECode.SUCCESS) {
+              if(response.code === 200) {
                 this.$commonUtil.message.success(response.message)
                 this.$router.go(0);
               }

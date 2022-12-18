@@ -664,7 +664,7 @@ export default {
       blogSortParams.pageSize = 500;
       blogSortParams.currentPage = 1;
       getBlogSortList(blogSortParams).then(response => {
-        if(response.code == this.$ECode.SUCCESS) {
+        if(response.code === 200) {
           this.blogSortData = response.data.records;
           this.sortOptions = response.data.records;
         }
@@ -688,7 +688,7 @@ export default {
       params.orderByDescColumn = this.orderByDescColumn
       params.orderByAscColumn = this.orderByAscColumn
       getBlogList(params).then(response => {
-        if(response.code == this.$ECode.SUCCESS) {
+        if(response.code === 200) {
           this.tableData = response.data.records;
           this.currentPage = response.data.current;
           this.pageSize = response.data.size;
@@ -704,7 +704,7 @@ export default {
       var dictTypeList =  ['sys_recommend_level', 'sys_original_status', 'sys_publish_status', 'sys_normal_disable', 'sys_blog_type']
 
       getListByDictTypeList(dictTypeList).then(response => {
-        if (response.code == this.$ECode.SUCCESS) {
+        if (response.code === 200) {
           var dictMap = response.data;
           this.blogOriginalDictList = dictMap.sys_original_status.list
           this.blogPublishDictList = dictMap.sys_publish_status.list
@@ -787,7 +787,7 @@ export default {
     // 获取系统配置
     getSystemConfigList: function() {
       getSystemConfig().then(response => {
-        if (response.code == this.$ECode.SUCCESS) {
+        if (response.code === 200) {
           if (response.data) {
             this.systemConfig = response.data;
           }
@@ -846,7 +846,7 @@ export default {
         subjectItemList.push(params)
       }
       addSubjectItemList(subjectItemList).then(response => {
-        if (response.code == this.$ECode.SUCCESS) {
+        if (response.code === 200) {
           this.$commonUtil.message.success(response.message)
           // 清空选中列表
           this.multipleSelection = []
@@ -960,7 +960,7 @@ export default {
         action,
         success: (response) => {
           let res = JSON.parse(response)
-          if(res.code == this.$ECode.SUCCESS) {
+          if(res.code === 200) {
             this.$commonUtil.message.success(res.message)
             //获取博客列表
             this.blogList()
@@ -989,7 +989,7 @@ export default {
         action,
         success: (response) => {
           let res = JSON.parse(response)
-          if(res.code == this.$ECode.SUCCESS) {
+          if(res.code === 200) {
             this.$commonUtil.message.success("图片上传成功")
             let pictureList = res.data
             let list = []
@@ -1171,7 +1171,7 @@ export default {
       })
         .then(() => {
           deleteBatchBlog(that.multipleSelection).then(response => {
-            if (response.code == this.$ECode.SUCCESS) {
+            if (response.code === 200) {
               that.$commonUtil.message.success(response.message)
               that.blogList();
             } else {
@@ -1197,7 +1197,7 @@ export default {
           let params = formatData(this.form);
           if (this.isEditForm) {
             editBlog(this.form).then(response => {
-              if (response.code == this.$ECode.SUCCESS) {
+              if (response.code === 200) {
                 this.$commonUtil.message.success(response.message)
                 // 清空LocalStorage中的内容
                 window.LS.remove("form")
@@ -1210,7 +1210,7 @@ export default {
 
           } else {
             addBlog(this.form).then(response => {
-              if (response.code == this.$ECode.SUCCESS) {
+              if (response.code === 200) {
                 this.$commonUtil.message.success(response.message)
                 // 清空cookie中的内容
                 window.LS.remove("form")

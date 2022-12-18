@@ -325,7 +325,7 @@ export default {
           var params = [];
           params.push(row);
           deleteBatchStudyVideo(params).then(response => {
-            if(response.code == this.$ECode.SUCCESS) {
+            if(response.code === 200) {
               this.$commonUtil.message.success(response.message)
               this.studyVideoList();
             } else {
@@ -350,7 +350,7 @@ export default {
       })
         .then(() => {
           deleteBatchStudyVideo(that.multipleSelection).then(response => {
-            if(response.code == this.$ECode.SUCCESS) {
+            if(response.code === 200) {
               this.$commonUtil.message.success(response.message)
               this.studyVideoList();
             } else {
@@ -370,7 +370,7 @@ export default {
           this.form.content = this.$refs.ckeditor.getData(); //获取CKEditor中的内容
           if (this.isEditForm) {
             editStudyVideo(this.form).then(response => {
-              if(response.code == this.$ECode.SUCCESS) {
+              if(response.code === 200) {
                 this.$commonUtil.message.success(response.message)
                 this.dialogFormVisible = false;
                 this.studyVideoList();
@@ -380,7 +380,7 @@ export default {
             });
           } else {
             addStudyVideo(this.form).then(response => {
-              if (response.code == this.$ECode.SUCCESS) {
+              if (response.code === 200) {
                 this.$commonUtil.message.success(response.message)
                 this.dialogFormVisible = false;
                 this.studyVideoList();

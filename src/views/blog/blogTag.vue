@@ -231,7 +231,7 @@ export default {
       )
         .then(() => {
           tagSortByClickCount().then(response => {
-            if (response.code == this.$ECode.SUCCESS) {
+            if (response.code === 200) {
               this.$commonUtil.message.success(response.message)
               this.tagList();
             }
@@ -255,7 +255,7 @@ export default {
         .then(() => {
 
 					tagSortByCite().then(response => {
-            if (response.code == this.$ECode.SUCCESS) {
+            if (response.code === 200) {
               this.$commonUtil.message.success(response.message)
               this.tagList();
             }
@@ -284,7 +284,7 @@ export default {
           params.uid = row.uid;
 
           stickTag(params).then(response => {
-            if (response.code == this.$ECode.SUCCESS) {
+            if (response.code === 200) {
               this.tagList();
               this.$commonUtil.message.success(response.message)
             } else {
@@ -308,7 +308,7 @@ export default {
           var params = [];
           params.push(row);
           deleteBatchTag(params).then(response => {
-            if(response.code == this.$ECode.SUCCESS) {
+            if(response.code === 200) {
               this.$commonUtil.message.success(response.message)
             } else {
               this.$commonUtil.message.error(response.message)
@@ -334,7 +334,7 @@ export default {
       })
         .then(() => {
           deleteBatchTag(that.multipleSelection).then(response => {
-            if(response.code == this.$ECode.SUCCESS) {
+            if(response.code === 200) {
               this.$commonUtil.message.success(response.message)
             } else {
               this.$commonUtil.message.error(response.message)
@@ -358,7 +358,7 @@ export default {
         } else {
           if (this.isEditForm) {
             editTag(this.form).then(response => {
-              if (response.code == this.$ECode.SUCCESS) {
+              if (response.code === 200) {
                 this.$commonUtil.message.success(response.message)
                 this.dialogFormVisible = false;
                 this.tagList();
@@ -369,7 +369,7 @@ export default {
           } else {
             addTag(this.form).then(response => {
               console.log(response);
-              if (response.code == this.$ECode.SUCCESS) {
+              if (response.code === 200) {
                 this.$commonUtil.message.success(response.message)
                 this.dialogFormVisible = false;
                 this.tagList();

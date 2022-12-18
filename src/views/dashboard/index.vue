@@ -2,11 +2,11 @@
   <div class="dashboard-editor-container">
     <!-- 右上角github图标 -->
     <el-tooltip content="Github源码" effect="dark" placement="bottom">
-      <github-corner style="position: absolute; top: 0px; border: 0; right: 0;"></github-corner>
+      <github-corner style="position: absolute; top: 0px; border: 0; right: 0;"/>
     </el-tooltip>
 
     <!-- 顶部内容 -->
-    <el-row class="panel-group" :gutter="40">
+    <el-row :gutter="40" class="panel-group">
       <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
         <div class="card-panel">
           <div class="card-panel-icon-wrapper icon-money" @click="btnClick('1')">
@@ -14,7 +14,7 @@
           </div>
           <div class="card-panel-description">
             <div class="card-panel-text">今日IP数：</div>
-            <count-to class="card-panel-num" :startVal="0" :endVal="visitAddTotal" :duration="3200"></count-to>
+            <count-to :start-val="0" :end-val="visitAddTotal" :duration="3200" class="card-panel-num"/>
           </div>
         </div>
       </el-col>
@@ -26,7 +26,7 @@
           </div>
           <div class="card-panel-description">
             <div class="card-panel-text">用户数:</div>
-            <count-to class="card-panel-num" :startVal="0" :endVal="userTotal" :duration="2600"></count-to>
+            <count-to :start-val="0" :end-val="userTotal" :duration="2600" class="card-panel-num"/>
           </div>
         </div>
       </el-col>
@@ -38,7 +38,7 @@
           </div>
           <div class="card-panel-description">
             <div class="card-panel-text">评论数：</div>
-            <count-to class="card-panel-num" :startVal="0" :endVal="commentTotal" :duration="3000"></count-to>
+            <count-to :start-val="0" :end-val="commentTotal" :duration="3000" class="card-panel-num"/>
           </div>
         </div>
       </el-col>
@@ -49,7 +49,7 @@
           </div>
           <div class="card-panel-description">
             <div class="card-panel-text">文章数:</div>
-            <count-to class="card-panel-num" :startVal="0" :endVal="blogTotal" :duration="3600"></count-to>
+            <count-to :start-val="0" :end-val="blogTotal" :duration="3600" class="card-panel-num"/>
           </div>
         </div>
       </el-col>
@@ -57,7 +57,7 @@
 
     <!--文章贡献度-->
     <el-row>
-      <CalendarChart></CalendarChart>
+      <CalendarChart/>
     </el-row>
 
     <!-- 分类图-->
@@ -65,12 +65,12 @@
       <el-col :xs="24" :sm="24" :lg="8">
         <div class="chart-wrapper">
           <pie-chart
-            ref="blogSortPie"
-            @clickPie="clickBlogSortPie"
             v-if="showPieBlogSortChart"
+            ref="blogSortPie"
             :value="blogCountByBlogSort"
-            :tagName="blogSortNameArray"
-          ></pie-chart>
+            :tag-name="blogSortNameArray"
+            @clickPie="clickBlogSortPie"
+          />
         </div>
       </el-col>
 
@@ -78,10 +78,10 @@
         <div class="chart-wrapper">
           <pie-chart
             v-if="showPieChart"
-            @clickPie="clickBlogTagPie"
             :value="blogCountByTag"
-            :tagName="tagNameArray"
-          ></pie-chart>
+            :tag-name="tagNameArray"
+            @clickPie="clickBlogTagPie"
+          />
         </div>
       </el-col>
 
@@ -93,55 +93,55 @@
         :xl="{span: 6}"
         style="margin-bottom:30px;"
       >
-        <div class="chart-wrapper" v-permission="'/todo/getList'">
-          <todo-list></todo-list>
+        <div v-permission="'/todo/getList'" class="chart-wrapper">
+          <todo-list/>
         </div>
       </el-col>
     </el-row>
 
     <!--访问量统计-->
     <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
-      <line-chart v-if="showLineChart" :chart-data="lineChartData"></line-chart>
+      <line-chart v-if="showLineChart" :chart-data="lineChartData"/>
     </el-row>
 
     <!--仪表盘弹框通知-->
     <el-dialog
-      title="通知"
-      :visible.sync="notificationDialogVisible"
       v-if="systemConfig.openDashboardNotification == 1"
-      width="50%"
-      :closeOnClickModal="false"
-      :closeOnPressEscape="false"
+      :visible.sync="notificationDialogVisible"
+      :close-on-click-modal="false"
+      :close-on-press-escape="false"
       :before-close="closeNotificationDialogVisible"
+      title="通知"
+      width="50%"
       center>
-      <span v-html="systemConfig.dashboardNotification"></span>
+      <span v-html="systemConfig.dashboardNotification"/>
     </el-dialog>
 
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import CountTo from "vue-count-to";
+import { mapGetters } from 'vuex'
+import CountTo from 'vue-count-to'
 import {
   init,
   getVisitByWeek,
   getBlogCountByTag,
   getBlogCountByBlogSort
-} from "@/api/index";
-import GithubCorner from "@/components/GithubCorner";
-import PieChart from "@/components/PieChart";
-import TodoList from "@/components/TodoList";
-import BarChart from "@/components/BarChart";
-import LineChart from "@/components/LineChart";
-import CalendarChart from "@/components/CalendarChart";
-import { getSystemConfig} from "@/api/systemConfig";
-import { mapMutations } from "vuex";
+} from '@/api/index'
+import GithubCorner from '@/components/GithubCorner'
+import PieChart from '@/components/PieChart'
+import TodoList from '@/components/TodoList'
+import BarChart from '@/components/BarChart'
+import LineChart from '@/components/LineChart'
+import CalendarChart from '@/components/CalendarChart'
+import { getSystemConfig } from '@/api/systemConfig'
+import { mapMutations } from 'vuex'
 
 export default {
-  name: "dashboard",
+  name: 'Dashboard',
   computed: {
-    ...mapGetters(["name", "roles"])
+    ...mapGetters(['name', 'roles'])
   },
   components: {
     GithubCorner,
@@ -168,111 +168,110 @@ export default {
       lineChartData: {},
       systemConfig: {}, // 系统配置
       notificationDialogVisible: this.$store.state.app.openNotificationDialogVisible
-    };
+    }
   },
   created() {
-    this.getSystemConfigData();
+    this.getSystemConfigData()
     init().then(response => {
-      if (response.code == this.$ECode.SUCCESS) {
-        this.blogTotal = response.data.blogCount;
-        this.commentTotal = response.data.commentCount;
-        this.userTotal = response.data.userCount;
-        this.visitAddTotal = response.data.visitCount;
+      if (response.code === 200) {
+        this.blogTotal = response.data.blogCount
+        this.commentTotal = response.data.commentCount
+        this.userTotal = response.data.userCount
+        this.visitAddTotal = response.data.visitCount
       }
-    });
+    })
 
     getVisitByWeek().then(response => {
-      if (response.code == this.$ECode.SUCCESS) {
-        var visitByWeek = response.data;
+      if (response.code === this.$ECode.SUCCESS) {
+        var visitByWeek = response.data
         var lineChartData = {
           date: visitByWeek.date,
           expectedData: visitByWeek.pv,
           actualData: visitByWeek.uv
-        };
-        this.lineChartData = lineChartData;
-        this.showLineChart = true;
+        }
+        this.lineChartData = lineChartData
+        this.showLineChart = true
       }
-    });
+    })
 
-    //通过标签获取博客数目
+    // 通过标签获取博客数目
     getBlogCountByTag().then(response => {
-      if (response.code == this.$ECode.SUCCESS) {
-        this.blogCountByTag = response.data;
-        var tagList = this.blogCountByTag;
+      if (response.code === 200) {
+        this.blogCountByTag = response.data
+        var tagList = this.blogCountByTag
         for (var a = 0; a < this.blogCountByTag.length; a++) {
-          this.tagNameArray.push(tagList[a].name);
+          this.tagNameArray.push(tagList[a].name)
         }
-        this.showPieChart = true;
+        this.showPieChart = true
       }
-    });
+    })
 
-    //通过博客分类获取博客数目
+    // 通过博客分类获取博客数目
     getBlogCountByBlogSort().then(response => {
-      if (response.code == this.$ECode.SUCCESS) {
-        this.blogCountByBlogSort = response.data;
-        let blogSortList = this.blogCountByBlogSort;
+      if (response.code === 200) {
+        this.blogCountByBlogSort = response.data
+        const blogSortList = this.blogCountByBlogSort
         for (var a = 0; a < this.blogCountByBlogSort.length; a++) {
-          this.blogSortNameArray.push(blogSortList[a].name);
+          this.blogSortNameArray.push(blogSortList[a].name)
         }
-        this.showPieBlogSortChart = true;
+        this.showPieBlogSortChart = true
       }
-    });
+    })
   },
   methods: {
-    //拿到vuex中的方法
-    ...mapMutations(["setOpenNotification"]),
+    // 拿到vuex中的方法
+    ...mapMutations(['setOpenNotification']),
     closeNotificationDialogVisible(done) {
-      this.setOpenNotification(false);
-      done();
+      this.setOpenNotification(false)
+      done()
     },
-    getSystemConfigData: function () {
+    getSystemConfigData: function() {
       getSystemConfig().then(response => {
-        if (response.code == this.$ECode.SUCCESS) {
-          this.systemConfig = response.data;
+        if (response.code === 200) {
+          this.systemConfig = response.data
         }
-      });
+      })
     },
     clickBlogTagPie: function(index) {
-      let tag = this.blogCountByTag[index];
+      const tag = this.blogCountByTag[index]
       this.$router.push({
-        path: "/blog/blog",
+        path: '/blog/blog',
         query: { tag: tag }
-      });
+      })
     },
     clickBlogSortPie: function(index) {
-      let blogSort = this.blogCountByBlogSort[index];
+      const blogSort = this.blogCountByBlogSort[index]
       this.$router.push({
-        path: "/blog/blog",
+        path: '/blog/blog',
         query: { blogSort: blogSort }
-      });
-
+      })
     },
     btnClick: function(type) {
       switch (type) {
-        case "1":
+        case '1':
           {
-            this.$router.push({ path: "/log/webVisit" });
+            this.$router.push({ path: '/log/webVisit' })
           }
-          break;
-        case "2":
+          break
+        case '2':
           {
-            this.$router.push({ path: "/user/user" });
+            this.$router.push({ path: '/user/user' })
           }
-          break;
-        case "3":
+          break
+        case '3':
           {
-            this.$router.push({ path: "/message/comment" });
+            this.$router.push({ path: '/message/comment' })
           }
-          break;
-        case "4":
+          break
+        case '4':
           {
-            this.$router.push({ path: "/blog/blog" });
+            this.$router.push({ path: '/blog/blog' })
           }
-          break;
+          break
       }
     }
   }
-};
+}
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>

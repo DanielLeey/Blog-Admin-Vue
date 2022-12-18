@@ -200,7 +200,7 @@ export default {
       params.currentPage = this.currentPage;
       params.keyword = this.keyword;
       pictureSpider(params).then(response => {
-        if (response.code == this.$ECode.SUCCESS) {
+        if (response.code === 200) {
           let spiderPictureList = response.data
           // TODO 暂时没有获取到返回的total
           if(spiderPictureList.length > 0) {

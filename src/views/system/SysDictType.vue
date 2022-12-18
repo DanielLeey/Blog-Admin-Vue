@@ -209,7 +209,7 @@ export default {
       params.orderByDescColumn = this.orderByDescColumn
       params.orderByAscColumn = this.orderByAscColumn
       getSysDictTypeList(params).then(response => {
-        if(response.code == this.$ECode.SUCCESS) {
+        if(response.code === 200) {
           this.tableData = response.data.records;
           this.currentPage = response.data.current;
           this.pageSize = response.data.size;
@@ -254,7 +254,7 @@ export default {
           let deleteList = []
           deleteList.push(sysDictType)
           deleteBatchSysDictType(deleteList).then(response => {
-            if(response.code == this.$ECode.SUCCESS) {
+            if(response.code === 200) {
               this.$commonUtil.message.success(response.message)
             } else {
               this.$commonUtil.message.error(response.message)
@@ -279,7 +279,7 @@ export default {
       })
         .then(() => {
           deleteBatchSysDictType(that.multipleSelection).then(response => {
-            if(response.code == this.$ECode.SUCCESS) {
+            if(response.code === 200) {
               this.$commonUtil.message.success(response.message)
             } else {
               this.$commonUtil.message.error(response.message)
@@ -314,7 +314,7 @@ export default {
         } else {
           if (this.isEditForm) {
             editSysDictType(this.form).then(response => {
-              if (response.code == this.$ECode.SUCCESS) {
+              if (response.code === 200) {
                 this.$commonUtil.message.success(response.message)
                 this.dialogFormVisible = false;
                 this.sysDictTypeList();
@@ -324,7 +324,7 @@ export default {
             });
           } else {
             addSysDictType(this.form).then(response => {
-              if (response.code == this.$ECode.SUCCESS) {
+              if (response.code === 200) {
                 this.$commonUtil.message.success(response.message)
                 this.dialogFormVisible = false;
                 this.sysDictTypeList();

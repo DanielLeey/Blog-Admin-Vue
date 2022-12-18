@@ -204,7 +204,7 @@ export default {
       params.currentPage = this.currentPage;
       params.pageSize = this.pageSize;
       getLogList(params).then(response => {
-        if(response.code == this.$ECode.SUCCESS) {
+        if(response.code === 200) {
           this.currentPage = response.data.current;
           this.pageSize = response.data.size;
           this.total = response.data.total;
@@ -223,7 +223,7 @@ export default {
     getDictList: function () {
       var dictTypeList =  ['sys_spend_time']
       getListByDictTypeList(dictTypeList).then(response => {
-        if (response.code == this.$ECode.SUCCESS) {
+        if (response.code === 200) {
           var dictMap = response.data;
           this.spendTimeDictList = dictMap.sys_spend_time.list
         }

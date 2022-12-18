@@ -207,7 +207,7 @@ export default {
     getDictList: function () {
       var dictTypeList =  ['sys_comment_type', 'sys_comment_source']
       getListByDictTypeList(dictTypeList).then(response => {
-        if (response.code == this.$ECode.SUCCESS) {
+        if (response.code === 200) {
           var dictMap = response.data;
           this.commentTypeDictList = dictMap.sys_comment_type.list
           this.commentSourceDictList = dictMap.sys_comment_source.list
@@ -233,7 +233,7 @@ export default {
 			params.pageSize = this.pageSize
 
 			getCommentList(params).then(response => {
-			  if(response.code == this.$ECode.SUCCESS) {
+			  if(response.code === 200) {
           this.tableData = response.data.records;
           this.currentPage = response.data.current;
           this.pageSize = response.data.size;

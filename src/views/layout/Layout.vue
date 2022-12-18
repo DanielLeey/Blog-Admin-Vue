@@ -2,23 +2,23 @@
   <div :class="classObj" class="app-wrapper">
     <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside"/>
 
-    <sidebar class="sidebar-container" :items="items"></sidebar>
+    <sidebar :items="items" class="sidebar-container"/>
 
     <div class="main-container">
       <navbar/>
-      <tags-view></tags-view>
+      <tags-view/>
       <app-main/>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import { Navbar, Sidebar, AppMain, TagsView } from "./components";
-import ResizeMixin from "./mixin/ResizeHandler";
-import { getMenu } from "@/api/login";
+import { mapGetters } from 'vuex'
+import { Navbar, Sidebar, AppMain, TagsView } from './components'
+import ResizeMixin from './mixin/ResizeHandler'
+import { getMenu } from '@/api/login'
 export default {
-  name: "Layout",
+  name: 'Layout',
   components: {
     Navbar,
     Sidebar,
@@ -29,32 +29,32 @@ export default {
   data() {
     return {
       items: []
-    };
+    }
   },
   computed: {
-    ...mapGetters(["menu"]),
+    ...mapGetters(['menu']),
     sidebar() {
-      return this.$store.state.app.sidebar;
+      return this.$store.state.app.sidebar
     },
     device() {
-      return this.$store.state.app.device;
+      return this.$store.state.app.device
     },
     classObj() {
       return {
         hideSidebar: !this.sidebar.opened,
         openSidebar: this.sidebar.opened,
         withoutAnimation: this.sidebar.withoutAnimation,
-        mobile: this.device === "mobile"
-      };
+        mobile: this.device === 'mobile'
+      }
     }
   },
   created() {
-    var that = this;
-    this.$store.dispatch("GetMenu").then(response => {
-      if (response.code == this.$ECode.SUCCESS) {
-        var parentList = response.data.parentList;
-        var sonList = response.data.sonList;
-        var items = [];
+    var that = this
+    this.$store.dispatch('GetMenu').then(response => {
+      if (response.code === 200) {
+        var parentList = response.data.parentList
+        var sonList = response.data.sonList
+        var items = []
         if (
           parentList &&
           parentList.length > 0 &&
@@ -62,41 +62,41 @@ export default {
           sonList.length > 0
         ) {
           for (var index = 0; index < parentList.length; index++) {
-            var newObject = { parent: parentList[index] };
-            var sonItem = [];
+            var newObject = { parent: parentList[index] }
+            var sonItem = []
 
             for (var index1 = 0; index1 < sonList.length; index1++) {
-              if (sonList[index1].parentUid == parentList[index].uid) {
-                sonItem.push(sonList[index1]);
+              if (sonList[index1].parentUid === parentList[index].uid) {
+                sonItem.push(sonList[index1])
               }
             }
-            //对子目录进行排序
+            // 对子目录进行排序
             for (var a = 0; a < sonItem.length; a++) {
               for (var b = 0; b < sonItem.length - a - 1; b++) {
-                var tag = false;
+                var tag = false
                 if (sonItem[b].sort < sonItem[b + 1].sort) {
-                  var temp = sonItem[b];
-                  sonItem[b] = sonItem[b + 1];
-                  sonItem[b + 1] = temp;
-                  tag = true;
+                  var temp = sonItem[b]
+                  sonItem[b] = sonItem[b + 1]
+                  sonItem[b + 1] = temp
+                  tag = true
                 }
               }
             }
-            //加入
-            newObject.sonItem = sonItem;
-            items.push(newObject);
+            // 加入
+            newObject.sonItem = sonItem
+            items.push(newObject)
           }
         }
-        that.items = items;
+        that.items = items
       }
-    });
+    })
   },
   methods: {
     handleClickOutside() {
-      this.$store.dispatch("CloseSideBar", { withoutAnimation: false });
+      this.$store.dispatch('CloseSideBar', { withoutAnimation: false })
     }
   }
-};
+}
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>

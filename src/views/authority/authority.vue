@@ -296,7 +296,7 @@ export default {
     submitForm: function () {
       if (this.isEditForm) {
         editAdminRole(this.form).then(response => {
-          if (response.code == this.$ECode.SUCCESS) {
+          if (response.code === 200) {
             this.$message({
               type: "success",
               message: response.data
@@ -312,7 +312,7 @@ export default {
         });
       } else {
         addAdminRole(this.form).then(response => {
-          if (response.code == this.$ECode.SUCCESS) {
+          if (response.code === 200) {
             this.$message({
               type: "success",
               message: response.data

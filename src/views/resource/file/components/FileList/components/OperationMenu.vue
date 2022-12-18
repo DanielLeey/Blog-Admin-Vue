@@ -169,7 +169,7 @@ export default {
     },
     //  上传按钮
     fileSuccess(result, file, fileList) {
-      if (result.code == this.$ECode.SUCCESS) {
+      if (result.code === 200) {
         this.$message.success(result.message)
         this.$emit('getTableDataByType')
         this.$emit('showStorage')
@@ -255,7 +255,7 @@ export default {
       }
 
       createFile(data).then(res => {
-        if (res.code == this.$ECode.SUCCESS) {
+        if (res.code === 200) {
           this.$message.success(res.message)
           this.$emit('getTableDataByType')
         } else {
@@ -268,7 +268,7 @@ export default {
     deleteSelectedFile() {
       //  批量删除接口
       batchDeleteFile(this.selectionFile).then(res => {
-        if (res.code == this.$ECode.SUCCESS) {
+        if (res.code === 200) {
           this.$commonUtil.message.success(res.message)
           this.$emit('getTableDataByType')
           this.$emit('showStorage')

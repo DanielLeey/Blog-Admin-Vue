@@ -48,7 +48,7 @@
         params.pageSize = 10;
         params.useSort = 1;
         getBlogList(params).then(response => {
-          if(response.code == this.$ECode.SUCCESS) {
+          if(response.code === 200) {
             switch (level) {
               case 1: {
                 this.list1 = response.data.records;
@@ -71,7 +71,7 @@
           list[a].sort = list.length - a;
         }
         editBatchBlog(list).then(response => {
-          if(response.code == this.$ECode.SUCCESS) {
+          if(response.code === 200) {
             this.$commonUtil.message.success(response.message)
           }
         });

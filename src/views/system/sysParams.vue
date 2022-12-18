@@ -243,7 +243,7 @@ export default {
       var dictTypeList = ['sys_params_type']
 
       getListByDictTypeList(dictTypeList).then(response => {
-        if (response.code == this.$ECode.SUCCESS) {
+        if (response.code === 200) {
           var dictMap = response.data;
           this.paramsTypeDictList = dictMap.sys_params_type.list
           if(dictMap.sys_params_type.defaultValue) {
@@ -278,7 +278,7 @@ export default {
         .then(() => {
           let list = [row]
           deleteBatchSysParams(list).then(response => {
-            if(response.code == this.$ECode.SUCCESS) {
+            if(response.code === 200) {
               this.$commonUtil.message.success(response.message)
             } else {
               this.$commonUtil.message.error(response.message)
@@ -301,7 +301,7 @@ export default {
         } else {
           if (this.isEditForm) {
             editSysParams(this.form).then(response => {
-              if (response.code == this.$ECode.SUCCESS) {
+              if (response.code === 200) {
                 this.$commonUtil.message.success(response.message)
                 this.dialogFormVisible = false;
                 this.sysParamsList();
@@ -311,7 +311,7 @@ export default {
             });
           } else {
             addSysParams(this.form).then(response => {
-              if (response.code == this.$ECode.SUCCESS) {
+              if (response.code === 200) {
                 this.$commonUtil.message.success(response.message)
                 this.dialogFormVisible = false;
                 this.sysParamsList();

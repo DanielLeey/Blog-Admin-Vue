@@ -6,6 +6,7 @@ module.exports = merge(prodEnv, {
   NODE_ENV: '"development"',
 
   //开发环境
+  GATEWAY_API: '"http://localhost:8000/gateway"',
   ADMIN_API: '"http://localhost:8000/admin"',
   PICTURE_API: '"http://localhost:8607/mogu-picture"',
   WEB_API: '"http://localhost:8607/mogu-web"',

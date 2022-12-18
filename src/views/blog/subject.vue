@@ -326,7 +326,7 @@ export default {
             deleteList.push(params)
           }
           deleteBatchSubject(deleteList).then(response => {
-            if (response.code == this.$ECode.SUCCESS) {
+            if (response.code === 200) {
               this.$commonUtil.message.success(response.message)
             } else {
               this.$commonUtil.message.error(response.message)
@@ -345,7 +345,7 @@ export default {
         } else {
           if (this.isEditForm) {
             editSubject(this.form).then(response => {
-              if(response.code == this.$ECode.SUCCESS) {
+              if(response.code === 200) {
                 this.$commonUtil.message.success(response.message)
                 this.dialogFormVisible = false;
                 this.subjectList();
@@ -355,7 +355,7 @@ export default {
             });
           } else {
             addSubject(this.form).then(response => {
-              if (response.code == this.$ECode.SUCCESS) {
+              if (response.code === 200) {
                 this.$commonUtil.message.success(response.message)
                 this.dialogFormVisible = false;
                 this.subjectList();

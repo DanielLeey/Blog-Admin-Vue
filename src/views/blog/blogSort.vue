@@ -235,7 +235,7 @@ export default {
       )
         .then(() => {
           blogSortByClickCount().then(response => {
-            if (response.code == this.$ECode.SUCCESS) {
+            if (response.code === 200) {
               this.$commonUtil.message.success(response.message)
               this.blogSortList();
             } else {
@@ -260,7 +260,7 @@ export default {
       )
         .then(() => {
           blogSortByCite().then(response => {
-            if (response.code == this.$ECode.SUCCESS) {
+            if (response.code === 200) {
               this.$commonUtil.message.success(response.message)
               this.blogSortList();
             } else {
@@ -288,7 +288,7 @@ export default {
           var params = {};
           params.uid = row.uid;
           stickBlogSort(params).then(response => {
-            if (response.code == this.$ECode.SUCCESS) {
+            if (response.code === 200) {
               this.$commonUtil.message.success(response.message)
               this.blogSortList();
             } else {
@@ -311,7 +311,7 @@ export default {
           var params = [];
           params.push(row);
           deleteBatchBlogSort(params).then(response => {
-            if(response.code == this.$ECode.SUCCESS) {
+            if(response.code === 200) {
               this.$commonUtil.message.success(response.message)
             } else {
               this.$commonUtil.message.error(response.message)
@@ -336,7 +336,7 @@ export default {
       })
         .then(() => {
           deleteBatchBlogSort(that.multipleSelection).then(response => {
-            if(response.code == this.$ECode.SUCCESS) {
+            if(response.code === 200) {
               this.$commonUtil.message.success(response.message)
             } else {
               this.$commonUtil.message.error(response.message)
@@ -362,7 +362,7 @@ export default {
           if (this.isEditForm) {
             editBlogSort(this.form).then(response => {
               console.log(response);
-              if (response.code == this.$ECode.SUCCESS) {
+              if (response.code === 200) {
                 this.$commonUtil.message.success(response.message)
                 this.dialogFormVisible = false;
                 this.blogSortList();
@@ -373,7 +373,7 @@ export default {
           } else {
             addBlogSort(this.form).then(response => {
               console.log(response);
-              if (response.code == this.$ECode.SUCCESS) {
+              if (response.code === 200) {
                 this.$commonUtil.message.success(response.message)
                 this.dialogFormVisible = false;
                 this.blogSortList();

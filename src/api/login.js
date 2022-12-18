@@ -3,7 +3,7 @@ import qs from 'qs'
 
 export function login(param) {
   return request({
-    url: process.env.ADMIN_API + '/auth/login',
+    url: process.env.GATEWAY_API + '/auth/login',
     method: 'post',
     data: param.toString()
   })
@@ -17,10 +17,11 @@ export function getInfo(token) {
   })
 }
 
-export function getMenu() {
+export function getMenu(token) {
   return request({
     url: process.env.ADMIN_API + '/auth/getMenu',
-    method: 'get'
+    method: 'get',
+    params: { token }
   })
 }
 

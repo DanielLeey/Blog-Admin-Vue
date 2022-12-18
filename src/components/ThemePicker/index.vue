@@ -39,7 +39,7 @@ export default {
     getSystemConfigData: function() {
       var that = this
       getSystemConfig().then(response => {
-        if (response.code == this.$ECode.SUCCESS) {
+        if (response.code === 200) {
           this.systemConfig = response.data;
           let themeColor = this.systemConfig.themeColor ? this.systemConfig.themeColor:ORIGINAL_THEME
           this.theme = themeColor

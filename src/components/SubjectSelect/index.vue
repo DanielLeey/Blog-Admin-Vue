@@ -107,7 +107,7 @@ export default {
       params.currentPage = this.currentPage
       getSubjectList(params).then(response => {
         console.log("得到的专题列表", response)
-        if (response.code == this.$ECode.SUCCESS) {
+        if (response.code === 200) {
           this.tableData = response.data.records;
           this.currentPage = response.data.current;
           this.pageSize = response.data.size;

@@ -233,7 +233,7 @@
         params.pageSize = this.pageSize;
 
         getFeedbackList(params).then(response => {
-          if(response.code == this.$ECode.SUCCESS) {
+          if(response.code === 200) {
             this.tableData = response.data.records;
             this.currentPage = response.data.current;
             this.pageSize = response.data.size;
@@ -255,7 +255,7 @@
       getDictList: function () {
         var dictTypeList = ['sys_feedback_status']
         getListByDictTypeList(dictTypeList).then(response => {
-          if (response.code == this.$ECode.SUCCESS) {
+          if (response.code === 200) {
             let dictMap = response.data;
             this.feedbackStatusDictList = dictMap.sys_feedback_status.list
           }
@@ -304,7 +304,7 @@
         if (this.isEditForm) {
           editFeedback(this.form).then(response => {
             console.log(response);
-            if (response.code == this.$ECode.SUCCESS) {
+            if (response.code === 200) {
               this.$commonUtil.message.success(response.message)
               this.dialogFormVisible = false;
               this.linkList();

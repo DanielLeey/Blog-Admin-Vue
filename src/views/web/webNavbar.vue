@@ -310,7 +310,7 @@ export default {
     WebNavbarAllList: function() {
       console.log("获取全部")
       getWebNavbarAllList().then(response => {
-        if (response.code == this.$ECode.SUCCESS) {
+        if (response.code === 200) {
           this.tableData = response.data;
           this.menuOptions = response.data;
         }
@@ -330,7 +330,7 @@ export default {
     getDictList: function () {
       var dictTypeList =  ['sys_menu_level', 'sys_yes_no', 'sys_jump_external']
       getListByDictTypeList(dictTypeList).then(response => {
-        if (response.code == this.$ECode.SUCCESS) {
+        if (response.code === 200) {
           var dictMap = response.data;
           this.menuLevelDictList = dictMap.sys_menu_level.list
           this.yesNoDictList = dictMap.sys_yes_no.list
@@ -384,7 +384,7 @@ export default {
           let params = {}
           params.uid = row.uid
           deleteWebNavbar(params).then(response => {
-            if(response.code == this.$ECode.SUCCESS) {
+            if(response.code === 200) {
               this.$commonUtil.message.success(response.message)
             } else {
               this.$commonUtil.message.error(response.message)
@@ -406,7 +406,7 @@ export default {
         params.append("pageSize", 100);
         getMenuList(params).then(response => {
           console.log(response);
-          if (response.code == this.$ECode.SUCCESS) {
+          if (response.code === 200) {
             this.menuOptions = response.data.data.records;
           }
         });
@@ -422,7 +422,7 @@ export default {
         } else {
           if (this.isEditForm) {
             editWebNavbar(this.form).then(response => {
-              if (response.code == this.$ECode.SUCCESS) {
+              if (response.code === 200) {
                 this.$commonUtil.message.success(response.message)
                 this.dialogFormVisible = false;
               } else {
@@ -431,7 +431,7 @@ export default {
             });
           } else {
             addWebNavbar(this.form).then(response => {
-              if (response.code == this.$ECode.SUCCESS) {
+              if (response.code === 200) {
                 this.$commonUtil.message.success(response.message)
                 this.dialogFormVisible = false;
                 this.WebNavbarAllList();

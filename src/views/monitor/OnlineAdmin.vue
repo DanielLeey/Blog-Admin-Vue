@@ -115,7 +115,7 @@ export default {
       params.currentPage = this.currentPage;
       params.pageSize = this.pageSize;
       getOnlineAdminList(params).then(response => {
-        if(response.code == this.$ECode.SUCCESS) {
+        if(response.code === 200) {
           this.tableData = response.data.records;
           this.currentPage = response.data.current;
           this.pageSize = response.data.size;
@@ -138,7 +138,7 @@ export default {
           var params = [];
           params.push(row.tokenId);
           forceLogout(params).then(response => {
-            if(response.code == this.$ECode.SUCCESS) {
+            if(response.code === 200) {
               this.$commonUtil.message.success(response.message)
             } else {
               this.$commonUtil.message.error(response.message)
@@ -168,7 +168,7 @@ export default {
       })
         .then(() => {
           forceLogout(tokenUidList).then(response => {
-            if(response.code == this.$ECode.SUCCESS) {
+            if(response.code === 200) {
               this.$commonUtil.message.success(response.message)
             } else {
               this.$commonUtil.message.error(response.message)

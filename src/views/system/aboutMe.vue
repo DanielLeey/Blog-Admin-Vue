@@ -213,7 +213,7 @@ export default {
     getMeInfo: function() {
       var getMeParams = new URLSearchParams();
       getMe(getMeParams).then(response => {
-        if (response.code == this.$ECode.SUCCESS) {
+        if (response.code === 200) {
           this.form = response.data;
           this.fileIds = this.form.avatar;
         }
@@ -228,7 +228,7 @@ export default {
     // 获取系统配置
     getSystemConfigList: function() {
       getSystemConfig().then(response => {
-        if (response.code == this.$ECode.SUCCESS) {
+        if (response.code === 200) {
           this.systemConfig = response.data;
         }
       });
@@ -240,7 +240,7 @@ export default {
       var params = {};
       params.dictType = 'sys_user_sex';
       getListByDictType(params).then(response => {
-        if (response.code == this.$ECode.SUCCESS) {
+        if (response.code === 200) {
           this.genderDictList = response.data.list;
         }
       });
@@ -321,7 +321,7 @@ export default {
                 params.append("newPwd", this.changePwdForm.newPwd1);
                 changePwd(params).then(response => {
                   console.log(response);
-                  if (response.code == this.$ECode.SUCCESS) {
+                  if (response.code === 200) {
                     this.$notify({
                       title: "成功",
                       message: response.message,

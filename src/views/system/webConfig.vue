@@ -364,7 +364,7 @@ export default {
       var params = {};
       params.dictType = 'sys_normal_disable';
       getListByDictType(params).then(response => {
-        if (response.code == this.$ECode.SUCCESS) {
+        if (response.code === 200) {
           this.openDictList = response.data.list;
         }
       });
@@ -377,7 +377,7 @@ export default {
     },
     getWebConfigFun: function() {
       getWebConfig().then(response => {
-        if (response.code == this.$ECode.SUCCESS) {
+        if (response.code === 200) {
           let data = response.data;
           if (data.showList) {
             let showList = JSON.parse(data.showList)
@@ -397,7 +397,7 @@ export default {
     // 获取系统配置
     getSystemConfigList: function() {
       getSystemConfig().then(response => {
-        if (response.code == this.$ECode.SUCCESS) {
+        if (response.code === 200) {
           this.systemConfig = response.data;
         }
       });
@@ -462,7 +462,7 @@ export default {
     },
     fileSuccess_ali: function(response, file, fileList) {
       console.log(response);
-      if (response.code == this.$ECode.SUCCESS) {
+      if (response.code === 200) {
         let fileList = response.data;
         if (fileList.length > 0) {
           this.form.aliPay = fileList[0].uid;
@@ -477,7 +477,7 @@ export default {
     },
 
     fileSuccess_weixin: function(response, file, fileList) {
-      if (response.code == this.$ECode.SUCCESS) {
+      if (response.code === 200) {
         let fileList = response.data;
         if (fileList.length > 0) {
           this.form.weixinPay = fileList[0].uid;

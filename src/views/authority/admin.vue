@@ -296,7 +296,7 @@ export default {
       params.currentPage = this.currentPage
       params.pageSize = this.pageSize
       getAdminList(params).then(response => {
-        if(response.code == this.$ECode.SUCCESS) {
+        if(response.code === 200) {
           let tableData = response.data.records;
           for(let a=0; a< tableData.length; a++) {
             tableData[a].maxStorageSize = tableData[a].maxStorageSize / 1024 / 1024
@@ -316,7 +316,7 @@ export default {
       var params = {};
       params.dictType = 'sys_user_sex';
       getListByDictType(params).then(response => {
-        if (response.code == this.$ECode.SUCCESS) {
+        if (response.code === 200) {
           this.genderDictList = response.data.list;
           // 设置默认值
           if(response.data.defaultValue) {
@@ -398,7 +398,7 @@ export default {
           let params = {}
           params.uid = row.uid
           restPwdAdmin(params).then(response => {
-            if (response.code == this.$ECode.SUCCESS) {
+            if (response.code === 200) {
               this.$commonUtil.message.success(response.message)
             } else {
               this.$commonUtil.message.error(response.message)
@@ -439,7 +439,7 @@ export default {
           adminUids.push(row.uid);
           params.append("adminUids", adminUids);
           deleteAdmin(params).then(response => {
-            if(response.code == this.$ECode.SUCCESS) {
+            if(response.code === 200) {
               this.$commonUtil.message.success(response.message)
             } else {
               this.$commonUtil.message.error(response.message)
@@ -462,7 +462,7 @@ export default {
         } else {
           if (this.isEditForm) {
             editAdmin(this.form).then(response => {
-              if (response.code == this.$ECode.SUCCESS) {
+              if (response.code === 200) {
                 this.$commonUtil.message.success(response.message)
                 this.dialogFormVisible = false;
                 this.adminList();
@@ -472,7 +472,7 @@ export default {
             });
           } else {
             addAdmin(this.form).then(response => {
-              if (response.code == this.$ECode.SUCCESS) {
+              if (response.code === 200) {
                 this.$commonUtil.message.success(response.message)
                 this.dialogFormVisible = false;
                 this.adminList();

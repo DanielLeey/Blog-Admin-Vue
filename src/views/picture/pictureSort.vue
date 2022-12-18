@@ -205,7 +205,7 @@ export default {
     getDictList: function () {
       var dictTypeList =  ['sys_yes_no']
       getListByDictTypeList(dictTypeList).then(response => {
-        if (response.code == this.$ECode.SUCCESS) {
+        if (response.code === 200) {
           var dictMap = response.data;
           this.yesNoDictList = dictMap.sys_yes_no.list
           if(dictMap.sys_yes_no.defaultValue) {
@@ -293,7 +293,7 @@ export default {
           let params = {};
           params.uid = row.uid
           stickPictureSort(params).then(response => {
-            if (response.code == this.$ECode.SUCCESS) {
+            if (response.code === 200) {
               this.pictureSortList();
               this.$commonUtil.message.success(response.message)
             } else {
@@ -315,7 +315,7 @@ export default {
           let params = {};
           params.uid = row.uid
           deletePictureSort(params).then(response => {
-            if(response.code == this.$ECode.SUCCESS) {
+            if(response.code === 200) {
               this.$commonUtil.message.success(response.message)
             } else {
               this.$commonUtil.message.error(response.message)
@@ -340,7 +340,7 @@ export default {
             });
           } else {
             addPictureSort(this.form).then(response => {
-              if (response.code == this.$ECode.SUCCESS) {
+              if (response.code === 200) {
                 this.$commonUtil.message.success(response.message)
               } else {
                 this.$commonUtil.message.error(response.message)

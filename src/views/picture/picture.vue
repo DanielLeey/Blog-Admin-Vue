@@ -388,7 +388,7 @@ export default {
           let params = {};
           params.uid = this.pictureUids.join(","); //将数组变成,组成
           deletePicture(params).then(response => {
-            if (response.code == this.$ECode.SUCCESS) {
+            if (response.code === 200) {
               this.$commonUtil.message.success(response.message)
               // 清空选中的列表
               this.pictureUids = []
@@ -446,7 +446,7 @@ export default {
       params.picName = checkedPicture.picName
       params.pictureSortUid = checkedPicture.pictureSortUid
       editPicture(params).then(response => {
-        if (response.code == this.$ECode.SUCCESS) {
+        if (response.code === 200) {
           this.$commonUtil.message.success(response.message)
           this.handleCurrentChange(this.currentPage);
         } else {
@@ -480,7 +480,7 @@ export default {
     },
     fileSuccess: function(response, file, fileList) {
       var that = this;
-      if (response.code == this.$ECode.SUCCESS) {
+      if (response.code === 200) {
         let file = response.data;
 
         for (let index = 0; index < file.length; index++) {
@@ -494,7 +494,7 @@ export default {
         this.count = this.count + 1;
         if(this.count % fileList.length == 0) {
           addPicture(this.pictureUploadList).then(res => {
-            if (res.code == this.$ECode.SUCCESS) {
+            if (res.code === 200) {
               this.$commonUtil.message.success(res.message)
               this.handleCurrentChange(this.currentPage);
             } else {

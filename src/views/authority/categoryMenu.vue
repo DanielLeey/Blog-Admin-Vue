@@ -312,7 +312,7 @@ export default {
   methods: {
     menuList: function() {
       getAllMenu().then(response => {
-        if (response.code == this.$ECode.SUCCESS) {
+        if (response.code === 200) {
           this.tableData = response.data;
           this.menuOptions = response.data;
         }
@@ -332,7 +332,7 @@ export default {
     getDictList: function () {
       var dictTypeList =  ['sys_menu_level', 'sys_yes_no', 'sys_jump_external']
       getListByDictTypeList(dictTypeList).then(response => {
-        if (response.code == this.$ECode.SUCCESS) {
+        if (response.code === 200) {
           var dictMap = response.data;
           this.menuLevelDictList = dictMap.sys_menu_level.list
           this.yesNoDictList = dictMap.sys_yes_no.list
@@ -385,7 +385,7 @@ export default {
           let params = {}
           params.uid = row.uid
           stickMenu(params).then(response => {
-            if (response.code == this.$ECode.SUCCESS) {
+            if (response.code === 200) {
               this.menuList();
               this.$commonUtil.message.success(response.message)
             } else {
@@ -407,7 +407,7 @@ export default {
           let params = {}
           params.uid = row.uid
           deleteMenu(params).then(response => {
-            if(response.code == this.$ECode.SUCCESS) {
+            if(response.code === 200) {
               this.$commonUtil.message.success(response.message)
             } else {
               this.$commonUtil.message.error(response.message)
@@ -429,7 +429,7 @@ export default {
         params.append("pageSize", 100);
         getMenuList(params).then(response => {
           console.log(response);
-          if (response.code == this.$ECode.SUCCESS) {
+          if (response.code === 200) {
             this.menuOptions = response.data.data.records;
           }
         });
@@ -445,7 +445,7 @@ export default {
         } else {
           if (this.isEditForm) {
             editMenu(this.form).then(response => {
-              if (response.code == this.$ECode.SUCCESS) {
+              if (response.code === 200) {
                 this.$commonUtil.message.success(response.message)
                 this.dialogFormVisible = false;
               } else {
@@ -454,7 +454,7 @@ export default {
             });
           } else {
             addMenu(this.form).then(response => {
-              if (response.code == this.$ECode.SUCCESS) {
+              if (response.code === 200) {
                 this.$commonUtil.message.success(response.message)
                 this.dialogFormVisible = false;
                 this.menuList();

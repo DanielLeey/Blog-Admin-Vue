@@ -154,7 +154,7 @@ export default {
       data.fileType = this.fileType
       this.fileList = []
       getFileList(data).then(res => {
-        if (res.code == this.$ECode.SUCCESS) {
+        if (res.code === 200) {
           this.fileList = res.data
           this.loading = false
         } else {
@@ -205,7 +205,7 @@ export default {
     //  移动文件模态框：初始化文件目录树
     initFileTree() {
       getFileTree().then(res => {
-        if (res.code == this.$ECode.SUCCESS) {
+        if (res.code === 200) {
           this.dialogMoveFile.fileTree = [res.data]
         } else {
           this.$message.error(res.errorMessage)
@@ -225,7 +225,7 @@ export default {
           files: JSON.stringify(this.selectionFile)
         }
         batchMoveFile(data).then(res => {
-          if (res.code == this.$ECode.SUCCESS) {
+          if (res.code === 200) {
             this.$commonUtil.message.success(res.message)
             this.getTableDataByType()
             this.dialogMoveFile.visible = false
@@ -244,7 +244,7 @@ export default {
           extendName: this.operationFile.extendName
         }
         moveFile(data).then(res => {
-          if (res.code == this.$ECode.SUCCESS) {
+          if (res.code === 200) {
             this.$commonUtil.message.success(res.message)
             this.getTableDataByType()
             this.dialogMoveFile.visible = false
@@ -257,7 +257,7 @@ export default {
     //  获取已占用内存
     showStorage() {
       getStorage().then(res => {
-        if (res.code == this.$ECode.SUCCESS) {
+        if (res.code === 200) {
           const size = res.data ? res.data.storageSize : 0
           const B = 1024
           const KB = Math.pow(1024, 2)

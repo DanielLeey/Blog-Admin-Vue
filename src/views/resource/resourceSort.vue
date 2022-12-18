@@ -259,7 +259,7 @@ export default {
           var params = {};
           params.uid = row.uid;
           stickResourceSort(params).then(response => {
-            if (response.code == this.$ECode.SUCCESS) {
+            if (response.code === 200) {
               this.resourceSortList();
               this.$commonUtil.message.success(response.message)
             } else {
@@ -281,7 +281,7 @@ export default {
           var params = [];
           params.push(row);
           deleteBatchResourceSort(params).then(response => {
-            if (response.code == this.$ECode.SUCCESS) {
+            if (response.code === 200) {
               this.$commonUtil.message.success(response.message)
             } else {
               this.$commonUtil.message.error(response.message)
@@ -307,7 +307,7 @@ export default {
       })
         .then(() => {
           deleteBatchResourceSort(that.multipleSelection).then(response => {
-            if (response.code == this.$ECode.SUCCESS) {
+            if (response.code === 200) {
               this.$commonUtil.message.success(response.message)
             } else {
               this.$commonUtil.message.error(response.message)
@@ -332,7 +332,7 @@ export default {
             });
           } else {
             addResourceSort(this.form).then(response => {
-              if (response.code == this.$ECode.SUCCESS) {
+              if (response.code === 200) {
                 this.$commonUtil.message.success(response.message)
               } else {
                 this.$commonUtil.message.error(response.message)

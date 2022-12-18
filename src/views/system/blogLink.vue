@@ -311,7 +311,7 @@ export default {
     getDictList: function () {
       var dictTypeList = ['sys_link_status']
       getListByDictTypeList(dictTypeList).then(response => {
-        if (response.code == this.$ECode.SUCCESS) {
+        if (response.code === 200) {
           var dictMap = response.data;
           this.linkStatusDictList = dictMap.sys_link_status.list
           if(dictMap.sys_link_status.defaultValue) {
@@ -367,7 +367,7 @@ export default {
           let params = {};
           params.uid = row.uid;
           stickLink(params).then(response => {
-            if (response.code == this.$ECode.SUCCESS) {
+            if (response.code === 200) {
               this.linkList();
               this.$commonUtil.message.success(response.message)
             } else {
@@ -390,7 +390,7 @@ export default {
           let params = {};
           params.uid = row.uid;
           deleteLink(params).then(response => {
-            if(response.code == this.$ECode.SUCCESS) {
+            if(response.code === 200) {
               this.$commonUtil.message.success(response.message)
               that.linkList();
             } else {
@@ -419,7 +419,7 @@ export default {
           if (this.isEditForm) {
             editLink(this.form).then(response => {
               console.log(response);
-              if (response.code == this.$ECode.SUCCESS) {
+              if (response.code === 200) {
                 this.$commonUtil.message.success(response.message)
                 this.dialogFormVisible = false;
                 this.linkList();
@@ -430,7 +430,7 @@ export default {
           } else {
             addLink(this.form).then(response => {
               console.log(response);
-              if (response.code == this.$ECode.SUCCESS) {
+              if (response.code === 200) {
                 this.$commonUtil.message.success(response.message)
                 this.dialogFormVisible = false;
                 this.linkList();

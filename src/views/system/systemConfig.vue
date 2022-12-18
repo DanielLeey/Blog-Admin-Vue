@@ -384,7 +384,7 @@ export default {
       var dictTypeList =  ['sys_search_model', 'sys_yes_no', 'sys_picture_priority', 'sys_storage_region', 'sys_normal_disable', 'sys_editor_modal']
 
       getListByDictTypeList(dictTypeList).then(response => {
-        if (response.code == this.$ECode.SUCCESS) {
+        if (response.code === 200) {
           let dictMap = response.data;
           this.areaDictList = dictMap.sys_storage_region.list
           this.yesNoDictList = dictMap.sys_yes_no.list
@@ -404,7 +404,7 @@ export default {
     },
     getSystemConfigList: function() {
       getSystemConfig().then(response => {
-        if (response.code == this.$ECode.SUCCESS) {
+        if (response.code === 200) {
           if (response.data) {
             this.form = response.data;
           }
@@ -415,7 +415,7 @@ export default {
       let params = []
       params.push(key)
       cleanRedisByKey(params).then(response => {
-        if(response.code == this.$ECode.SUCCESS) {
+        if(response.code === 200) {
           this.$commonUtil.message.success(response.message)
         } else {
           this.$commonUtil.message.error(response.message)
@@ -433,7 +433,7 @@ export default {
             this.form.dashboardNotification = this.$refs.editor.getData();
           }
           editSystemConfig(this.form).then(res => {
-            if (res.code == this.$ECode.SUCCESS) {
+            if (res.code === 200) {
               this.$commonUtil.message.success(res.message)
             } else {
               this.$commonUtil.message.error(res.message)

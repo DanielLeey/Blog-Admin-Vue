@@ -282,7 +282,7 @@
         params.currentPage = this.currentPage;
         params.pageSize = this.pageSize;
         getSysDictDataList(params).then(response => {
-          if (response.code == this.$ECode.SUCCESS) {
+          if (response.code === 200) {
             this.tableData = response.data.records;
             this.currentPage = response.data.current;
             this.pageSize = response.data.size;
@@ -296,7 +296,7 @@
         params.currentPage = 0;
         params.pageSize = 100;
         getSysDictTypeList(params).then(response => {
-          if (response.code == this.$ECode.SUCCESS) {
+          if (response.code === 200) {
             this.dictTypeList = response.data.records;
           }
         });
@@ -342,7 +342,7 @@
             let deleteList = []
             deleteList.push(sysDictData)
             deleteBatchSysDictData(deleteList).then(response => {
-              if(response.code == this.$ECode.SUCCESS) {
+              if(response.code === 200) {
                 this.$commonUtil.message.success(response.message)
                 that.sysDictDataList();
               } else {
@@ -367,7 +367,7 @@
         })
           .then(() => {
             deleteBatchSysDictData(that.multipleSelection).then(response => {
-              if(response.code == this.$ECode.SUCCESS) {
+              if(response.code === 200) {
                 this.$commonUtil.message.success(response.message)
                 that.sysDictDataList();
               } else {
@@ -395,7 +395,7 @@
             if (this.isEditForm) {
               editSysDictData(this.form).then(response => {
                 console.log(response);
-                if (response.code == this.$ECode.SUCCESS) {
+                if (response.code === 200) {
                   this.$commonUtil.message.success(response.message)
                   this.dialogFormVisible = false;
                   this.sysDictDataList();
@@ -405,7 +405,7 @@
               });
             } else {
               addSysDictData(this.form).then(response => {
-                if (response.code == this.$ECode.SUCCESS) {
+                if (response.code === 200) {
                   this.$commonUtil.message.success(response.message)
                   this.dialogFormVisible = false;
                   this.sysDictDataList();

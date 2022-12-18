@@ -62,9 +62,9 @@ const user = {
         getMenu().then(response => {
           const data = response.data
           // 这里对按钮进行一些处理
-          let buttonList = data.buttonList
-          let map = new Map();
-          for(let a=0; a<buttonList.length; a++) {
+          const buttonList = data.buttonList
+          const map = new Map()
+          for (let a = 0; a < buttonList.length; a++) {
             map.set(buttonList[a].url, buttonList[a])
           }
           commit('SET_BUTTON_MAP', map)

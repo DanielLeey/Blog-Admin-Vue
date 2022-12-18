@@ -133,7 +133,7 @@ export default {
   methods: {
     getWebName: function() {
       getWebSiteName().then(response => {
-        if (response.code === this.$ECode.SUCCESS) {
+        if (response.code === 200) {
           this.webSiteName = response.data
         }
       })

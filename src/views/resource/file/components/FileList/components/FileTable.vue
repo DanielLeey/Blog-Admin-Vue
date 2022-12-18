@@ -357,7 +357,7 @@ export default {
       }
       console.log('上传文件', data)
       editFile(data).then(res => {
-        if (res.code == this.$ECode.SUCCESS) {
+        if (res.code === 200) {
           this.$message.success('重命名成功')
           if (this.form.extendName == null) {
             console.log('对文件重命名')
@@ -477,7 +477,7 @@ export default {
         background: 'rgba(0, 0, 0, 0.7)'
       })
       unzipFile(fileInfo).then(res => {
-        if (res.code == this.$ECode.SUCCESS) {
+        if (res.code === 200) {
           this.$emit('getTableDataByType')
           this.$emit('showStorage')
           this.$message.success('解压成功')
@@ -508,7 +508,7 @@ export default {
     //  删除文件模态框-确定按钮
     confirmDeleteFile(fileInfo) {
       deleteFile(fileInfo).then(res => {
-        if (res.code == this.$ECode.SUCCESS) {
+        if (res.code === 200) {
           this.$emit('getTableDataByType')
           this.$emit('showStorage')
           this.$message.success('删除成功')

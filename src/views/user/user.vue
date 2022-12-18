@@ -402,7 +402,7 @@
         params.orderByAscColumn = this.orderByAscColumn
         getUserList(params).then(response => {
           console.log("getUserList", response);
-          if (response.code == this.$ECode.SUCCESS) {
+          if (response.code === 200) {
             this.tableData = response.data.records;
             this.currentPage = response.data.current;
             this.pageSize = response.data.size;
@@ -437,7 +437,7 @@
       getDictList: function () {
         var dictTypeList = ['sys_account_source', 'sys_comment_status', 'sys_user_sex', 'sys_user_tag']
         getListByDictTypeList(dictTypeList).then(response => {
-          if (response.code == this.$ECode.SUCCESS) {
+          if (response.code === 200) {
             var dictMap = response.data;
             this.accountSourceDictList = dictMap.sys_account_source.list
             this.commentStatusDictList = dictMap.sys_comment_status.list
@@ -478,7 +478,7 @@
             var params = {};
             params.uid = row.uid;
             deleteUser(params).then(response => {
-              if(response.code == this.$ECode.SUCCESS) {
+              if(response.code === 200) {
                 this.$commonUtil.message.success(response.message)
                 that.userList();
               } else {
@@ -501,7 +501,7 @@
             var params = {};
             params.uid = row.uid;
             resetUserPassword(params).then(response => {
-              if(response.code == this.$ECode.SUCCESS) {
+              if(response.code === 200) {
                 this.$commonUtil.message.success(response.message)
                 that.userList();
               } else {
@@ -524,7 +524,7 @@
           } else {
             if(this.isEditForm) {
               editUser(this.form).then(response => {
-                if (response.code == this.$ECode.SUCCESS) {
+                if (response.code === 200) {
                   this.$notify({
                     title: "成功",
                     message: response.message,
@@ -541,7 +541,7 @@
               });
             } else {
               addUser(this.form).then(response => {
-                if (response.code == this.$ECode.SUCCESS) {
+                if (response.code === 200) {
                   this.$notify({
                     title: "成功",
                     message: response.message,

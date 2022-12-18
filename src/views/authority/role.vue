@@ -157,7 +157,7 @@ export default {
     allMenuList: function () {
       getAllMenu().then(response => {
         console.log(response);
-        if (response.code == this.$ECode.SUCCESS) {
+        if (response.code === 200) {
           let data = response.data;
           this.categoryMenuList = data;
         }
@@ -172,7 +172,7 @@ export default {
       params.currentPage = this.currentPage;
       params.pageSize = this.pageSize;
       getRoleList(params).then(response => {
-        if (response.code == this.$ECode.SUCCESS) {
+        if (response.code === 200) {
           var data = response.data.records;
           //初始化菜单UID
           for (let a = 0; a < data.length; a++) {
@@ -229,7 +229,7 @@ export default {
           var params = {};
           params.uid = row.uid;
           deleteRole(params).then(response => {
-            if(response.code == this.$ECode.SUCCESS) {
+            if(response.code === 200) {
               this.$commonUtil.message.success(response.message)
             } else {
               this.$commonUtil.message.error(response.message)
@@ -257,7 +257,7 @@ export default {
 
           if (this.isEditForm) {
             editRole(data).then(response => {
-              if (response.code == this.$ECode.SUCCESS) {
+              if (response.code === 200) {
                 this.$commonUtil.message.success(response.message)
                 this.dialogFormVisible = false;
                 this.roleList();
@@ -267,7 +267,7 @@ export default {
             });
           } else {
             addRole(data).then(response => {
-              if (response.code == this.$ECode.SUCCESS) {
+              if (response.code === 200) {
                 this.$commonUtil.message.success(response.message)
                 this.dialogFormVisible = false;
                 this.roleList();
