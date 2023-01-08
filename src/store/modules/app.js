@@ -8,7 +8,7 @@ const app = {
     },
     device: 'desktop',
     openNotificationDialogVisible: true, // 仪表盘弹框通知
-    blogForm: {}, // 缓存博客表单信息
+    blogForm: {} // 缓存博客表单信息
   },
   mutations: {
     TOGGLE_SIDEBAR: state => {
@@ -33,7 +33,7 @@ const app = {
     },
     setBlogForm: (state, blogForm) => {
       state.blogForm = blogForm
-    },
+    }
   },
   actions: {
     ToggleSideBar: ({ commit }) => {

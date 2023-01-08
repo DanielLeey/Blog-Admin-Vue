@@ -3,21 +3,21 @@
     <!-- 查询和其他操作 -->
     <div class="filter-container" style="margin: 10px 0 10px 0;">
       <el-input
+        v-model="keyword"
         clearable
         class="filter-item"
         style="width: 200px;"
-        v-model="keyword"
         placeholder="请输入角色名称"
-      ></el-input>
-      <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFind" v-permission="'/role/getList'">查找</el-button>
-      <el-button class="filter-item" type="primary" @click="handleAdd" icon="el-icon-edit" v-permission="'/role/add'">添加角色</el-button>
+      />
+      <el-button v-permission="'/role/getList'" class="filter-item" type="primary" icon="el-icon-search" @click="handleFind">查找</el-button>
+      <el-button v-permission="'/role/add'" class="filter-item" type="primary" icon="el-icon-edit" @click="handleAdd">添加角色</el-button>
     </div>
 
     <el-table :data="tableData" style="width: 100%">
-      <el-table-column type="selection"></el-table-column>
+      <el-table-column type="selection"/>
       <el-table-column label="序号" width="60" align="center">
         <template slot-scope="scope">
-          <span>{{scope.$index + 1}}</span>
+          <span>{{ scope.$index + 1 }}</span>
         </template>
       </el-table-column>
 
@@ -55,8 +55,8 @@
 
       <el-table-column label="操作" fixed="right" min-width="150">
         <template slot-scope="scope">
-          <el-button @click="handleEdit(scope.row)" type="primary" size="small" v-permission="'/role/edit'">编辑</el-button>
-          <el-button @click="handleDelete(scope.row)" type="danger" size="small" v-permission="'/role/delete'">删除</el-button>
+          <el-button v-permission="'/role/edit'" type="primary" size="small" @click="handleEdit(scope.row)">编辑</el-button>
+          <el-button v-permission="'/role/delete'" type="danger" size="small" @click="handleDelete(scope.row)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -64,34 +64,34 @@
     <!--分页-->
     <div class="block">
       <el-pagination
-        @current-change="handleCurrentChange"
         :current-page.sync="currentPage"
         :page-size="pageSize"
-        layout="total, prev, pager, next, jumper"
         :total="total"
-      ></el-pagination>
+        layout="total, prev, pager, next, jumper"
+        @current-change="handleCurrentChange"
+      />
     </div>
 
     <!-- 添加或修改对话框 -->
     <el-dialog :title="title" :visible.sync="dialogFormVisible">
-      <el-form :model="form" :rules="rules" ref="form">
-        <el-form-item label="角色名称" :label-width="formLabelWidth" prop="roleName">
-          <el-input v-model="form.roleName" placeholder="请输入角色名称" auto-complete="off"></el-input>
+      <el-form ref="form" :model="form" :rules="rules">
+        <el-form-item :label-width="formLabelWidth" label="角色名称" prop="roleName">
+          <el-input v-model="form.roleName" placeholder="请输入角色名称" auto-complete="off"/>
         </el-form-item>
 
-        <el-form-item label="角色介绍" :label-width="formLabelWidth">
-          <el-input v-model="form.summary" placeholder="请输入角色介绍" auto-complete="off"></el-input>
+        <el-form-item :label-width="formLabelWidth" label="角色介绍">
+          <el-input v-model="form.summary" placeholder="请输入角色介绍" auto-complete="off"/>
         </el-form-item>
 
-        <el-form-item label="访问菜单" :label-width="formLabelWidth">
+        <el-form-item :label-width="formLabelWidth" label="访问菜单">
           <el-tree
             ref="tree"
             :data="categoryMenuList"
-            show-checkbox
-            node-key="uid"
             :props="defaultProps"
             :default-checked-keys="form.categoryMenuUids"
-          ></el-tree>
+            show-checkbox
+            node-key="uid"
+          />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -103,182 +103,182 @@
 </template>
 
 <script>
-import { getRoleList, addRole, editRole, deleteRole } from "@/api/role";
+import { getRoleList, addRole, editRole, deleteRole } from '@/api/role'
 
-import { getAllMenu } from "@/api/categoryMenu";
+import { getAllMenu } from '@/api/categoryMenu'
 
-import { formatData } from "@/utils/webUtils";
+import { formatData } from '@/utils/webUtils'
 export default {
   data() {
     return {
       tableData: [],
-      keyword: "",
+      keyword: '',
       currentPage: 1,
       pageSize: 10,
-      total: 0, //总数量
-      title: "增加角色",
-      dialogFormVisible: false, //控制弹出框
-      formLabelWidth: "120px",
+      total: 0, // 总数量
+      title: '增加角色',
+      dialogFormVisible: false, // 控制弹出框
+      formLabelWidth: '120px',
       isEditForm: false,
       form: {
         uid: null,
-        roleName: "",
-        summary: "",
-        categoryMenuUids: [],
+        roleName: '',
+        summary: '',
+        categoryMenuUids: []
       },
-      //分类菜单列表
+      // 分类菜单列表
       categoryMenuList: [],
       // tree配置项
       defaultProps: {
-        children: "childCategoryMenu",
-        label: "name"
+        children: 'childCategoryMenu',
+        label: 'name'
       },
       rules: {
         roleName: [
-          {required: true, message: '角色名称不能为空', trigger: 'blur'},
-          {min: 1, max: 20, message: '长度在1到20个字符'},
+          { required: true, message: '角色名称不能为空', trigger: 'blur' },
+          { min: 1, max: 20, message: '长度在1到20个字符' }
         ]
       }
-    };
-  },
-  created() {
-    this.allMenuList();
-    this.roleList();
+    }
   },
   watch: {
     'form': {
       handler(newVal, oldVal) {
-        console.log("value changed ", newVal, oldVal);
+        console.log('value changed ', newVal, oldVal)
       },
-      deep: true,
+      deep: true
     }
   },
+  created() {
+    this.allMenuList()
+    this.roleList()
+  },
   methods: {
-    allMenuList: function () {
+    allMenuList: function() {
       getAllMenu().then(response => {
-        console.log(response);
+        console.log(response)
         if (response.code === 200) {
-          let data = response.data;
-          this.categoryMenuList = data;
+          const data = response.data
+          this.categoryMenuList = data
         }
-      });
+      })
     },
-    handleFind: function () {
-      this.roleList();
+    handleFind: function() {
+      this.roleList()
     },
-    roleList: function () {
-      var params = {};
-      params.keyword = this.keyword;
-      params.currentPage = this.currentPage;
-      params.pageSize = this.pageSize;
+    roleList: function() {
+      var params = {}
+      params.keyword = this.keyword
+      params.currentPage = this.currentPage
+      params.pageSize = this.pageSize
       getRoleList(params).then(response => {
         if (response.code === 200) {
-          var data = response.data.records;
-          //初始化菜单UID
+          var data = response.data.records
+          // 初始化菜单UID
           for (let a = 0; a < data.length; a++) {
             if (data[a].categoryMenuUids) {
-              data[a].categoryMenuUids = eval("(" + data[a].categoryMenuUids + ")");
+              data[a].categoryMenuUids = data[a].categoryMenuUids
             } else {
-              data[a].categoryMenuUids = [];
+              data[a].categoryMenuUids = []
             }
           }
-          this.tableData = data;
-          this.currentPage = response.data.current;
-          this.pageSize = response.data.size;
-          this.total = response.data.total;
+          this.tableData = data
+          this.currentPage = response.data.current
+          this.pageSize = response.data.size
+          this.total = response.data.total
         }
-      });
+      })
     },
-    getFormObject: function () {
+    getFormObject: function() {
       var formObject = {
         uid: null,
         roleName: null,
         summary: null,
-        categoryMenuUids: [],
-      };
-      return formObject;
+        categoryMenuUids: []
+      }
+      return formObject
     },
 
-    handleAdd: function () {
-      this.title = "增加角色"
-      this.dialogFormVisible = true;
-      this.form = this.getFormObject();
+    handleAdd: function() {
+      this.title = '增加角色'
+      this.dialogFormVisible = true
+      this.form = this.getFormObject()
       setTimeout(() => {
-        this.$refs.tree.setCheckedKeys(this.form.categoryMenuUids);
-      }, 100);
-      this.isEditForm = false;
+        this.$refs.tree.setCheckedKeys(this.form.categoryMenuUids)
+      }, 100)
+      this.isEditForm = false
     },
 
-    handleEdit: function (row) {
-      this.title = "编辑角色"
-      this.dialogFormVisible = true;
-      this.isEditForm = true;
-      this.form = row;
+    handleEdit: function(row) {
+      this.title = '编辑角色'
+      this.dialogFormVisible = true
+      this.isEditForm = true
+      this.form = row
       setTimeout(() => {
-        this.$refs.tree.setCheckedKeys(this.form.categoryMenuUids);
-      }, 100);
+        this.$refs.tree.setCheckedKeys(this.form.categoryMenuUids)
+      }, 100)
     },
 
-    handleDelete: function (row) {
-      this.$confirm("此操作将把分类删除, 是否继续?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
+    handleDelete: function(row) {
+      this.$confirm('此操作将把分类删除, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
       })
         .then(() => {
-          var params = {};
-          params.uid = row.uid;
+          var params = {}
+          params.uid = row.uid
           deleteRole(params).then(response => {
-            if(response.code === 200) {
+            if (response.code === 200) {
               this.$commonUtil.message.success(response.message)
             } else {
               this.$commonUtil.message.error(response.message)
             }
-            this.roleList();
-          });
+            this.roleList()
+          })
         })
         .catch(() => {
-          this.$commonUtil.message.info("已取消删除")
-        });
+          this.$commonUtil.message.info('已取消删除')
+        })
     },
-    handleCurrentChange: function (val) {
-      this.currentPage = val;
-      this.roleList();
+    handleCurrentChange: function(val) {
+      this.currentPage = val
+      this.roleList()
     },
-    submitForm: function () {
+    submitForm: function() {
       this.$refs.form.validate((valid) => {
-        if(!valid) {
-          console.log("校验出错")
+        if (!valid) {
+          console.log('校验出错')
         } else {
-          //得到选中树的UID
-          this.form.categoryMenuUids = this.$refs.tree.getCheckedKeys();
-          let data = this.$commonUtil.deepClone(this.form)
-          data.categoryMenuUids = JSON.stringify(data.categoryMenuUids);
-
+          // 得到选中树的UID
+          this.form.categoryMenuUids = this.$refs.tree.getCheckedKeys()
+          const data = this.$commonUtil.deepClone(this.form)
+          // data.categoryMenuUids = JSON.stringify(data.categoryMenuUids)
+          
           if (this.isEditForm) {
             editRole(data).then(response => {
               if (response.code === 200) {
                 this.$commonUtil.message.success(response.message)
-                this.dialogFormVisible = false;
-                this.roleList();
+                this.dialogFormVisible = false
+                this.roleList()
               } else {
                 this.$commonUtil.message.error(response.message)
               }
-            });
+            })
           } else {
             addRole(data).then(response => {
               if (response.code === 200) {
                 this.$commonUtil.message.success(response.message)
-                this.dialogFormVisible = false;
-                this.roleList();
+                this.dialogFormVisible = false
+                this.roleList()
               } else {
                 this.$commonUtil.message.error(response.message)
               }
-            });
+            })
           }
         }
       })
     }
   }
-};
+}
 </script>

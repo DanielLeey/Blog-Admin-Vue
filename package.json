@@ -15,6 +15,7 @@
   "dependencies": {
     "axios": "0.18.1",
     "ckeditor": "^4.10.1",
+    "ckeditor4-vue": "^2.2.1",
     "clipboard": "^2.0.6",
     "codemirror": "^5.56.0",
     "compression-webpack-plugin": "^5.0.1",
@@ -43,6 +44,7 @@
     "xss": "^1.0.8"
   },
   "devDependencies": {
+    "@types/ckeditor": "^4.9.10",
     "autoprefixer": "8.5.0",
     "babel-core": "6.26.0",
     "babel-eslint": "8.2.6",

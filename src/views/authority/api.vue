@@ -5,13 +5,13 @@
 
       <el-cascader
         :options="options"
-        placeholder="请选择菜单名"
         v-model="keyword"
         :props="{ checkStrictly: true }"
-        clearable></el-cascader>
+        placeholder="请选择菜单名"
+        clearable/>
 
-      <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFind" v-permission="'/categoryMenu/getList'">查找</el-button>
-      <el-button class="filter-item" type="primary" @click="handleAdd" icon="el-icon-edit" v-permission="'/categoryMenu/add'">添加接口</el-button>
+      <el-button v-permission="'/categoryMenu/getList'" class="filter-item" type="primary" icon="el-icon-search" @click="handleFind">查找</el-button>
+      <el-button v-permission="'/categoryMenu/add'" class="filter-item" type="primary" icon="el-icon-edit" @click="handleAdd">添加接口</el-button>
     </div>
 
     <el-table :data="tableData" style="width: 100%">
@@ -23,7 +23,7 @@
 
               <el-table-column label width="60" align="center">
                 <template slot-scope="scope_child">
-                  <span>{{scope_child.$index + 1}}</span>
+                  <span>{{ scope_child.$index + 1 }}</span>
                 </template>
               </el-table-column>
 
@@ -35,13 +35,13 @@
 
               <el-table-column label width="100" align="center">
                 <template slot-scope="scope_child">
-                  <el-tag v-for="item in menuLevelDictList" :key="item.uid" v-if="scope_child.row.menuLevel == item.dictValue" :type="item.listClass">{{item.dictLabel}}</el-tag>
+                  <el-tag v-for="item in menuLevelDictList" v-if="scope_child.row.menuLevel == item.dictValue" :key="item.uid" :type="item.listClass">{{ item.dictLabel }}</el-tag>
                 </template>
               </el-table-column>
 
               <el-table-column label width="100" align="center">
                 <template slot-scope="scope">
-                  <el-tag v-for="item in menuTypeDictList" :key="item.uid" v-if="scope.row.menuType == item.dictValue" :type="item.listClass">{{item.dictLabel}}</el-tag>
+                  <el-tag v-for="item in menuTypeDictList" v-if="scope.row.menuType == item.dictValue" :key="item.uid" :type="item.listClass">{{ item.dictLabel }}</el-tag>
                 </template>
               </el-table-column>
 
@@ -66,7 +66,7 @@
 
               <el-table-column width="100" align="center">
                 <template slot-scope="scope">
-                  <el-tag v-for="item in yesNoDictList" :key="item.uid" v-if="scope.row.isShow == item.dictValue" :type="item.listClass">{{item.dictLabel}}</el-tag>
+                  <el-tag v-for="item in yesNoDictList" v-if="scope.row.isShow == item.dictValue" :key="item.uid" :type="item.listClass">{{ item.dictLabel }}</el-tag>
                 </template>
               </el-table-column>
 
@@ -92,9 +92,9 @@
 
               <el-table-column fixed="right" min-width="230">
                 <template slot-scope="scope_child">
-                  <el-button @click="handleStick(scope_child.row)" type="warning" size="small" v-permission="'/categoryMenu/stick'">置顶</el-button>
-                  <el-button @click="handleEdit(scope.row, scope_child.row)" type="primary" size="small" v-permission="'/categoryMenu/edit'">编辑</el-button>
-                  <el-button @click="handleDelete(scope_child.row)" type="danger" size="small" v-permission="'/categoryMenu/delete'">删除</el-button>
+                  <el-button v-permission="'/categoryMenu/stick'" type="warning" size="small" @click="handleStick(scope_child.row)">置顶</el-button>
+                  <el-button v-permission="'/categoryMenu/edit'" type="primary" size="small" @click="handleEdit(scope.row, scope_child.row)">编辑</el-button>
+                  <el-button v-permission="'/categoryMenu/delete'" type="danger" size="small" @click="handleDelete(scope_child.row)">删除</el-button>
                 </template>
               </el-table-column>
             </el-table>
@@ -104,7 +104,7 @@
 
       <el-table-column label="序号" width="60" align="center">
         <template slot-scope="scope">
-          <span>{{scope.$index + 1}}</span>
+          <span>{{ scope.$index + 1 }}</span>
         </template>
       </el-table-column>
 
@@ -116,13 +116,13 @@
 
       <el-table-column label="菜单级别" width="100" align="center">
         <template slot-scope="scope">
-          <el-tag v-for="item in menuLevelDictList" :key="item.uid" v-if="scope.row.menuLevel == item.dictValue" :type="item.listClass">{{item.dictLabel}}</el-tag>
+          <el-tag v-for="item in menuLevelDictList" v-if="scope.row.menuLevel == item.dictValue" :key="item.uid" :type="item.listClass">{{ item.dictLabel }}</el-tag>
         </template>
       </el-table-column>
 
       <el-table-column label="菜单类型" width="100" align="center">
         <template slot-scope="scope">
-          <el-tag v-for="item in menuTypeDictList" :key="item.uid" v-if="scope.row.menuType == item.dictValue" :type="item.listClass">{{item.dictLabel}}</el-tag>
+          <el-tag v-for="item in menuTypeDictList" v-if="scope.row.menuType == item.dictValue" :key="item.uid" :type="item.listClass">{{ item.dictLabel }}</el-tag>
         </template>
       </el-table-column>
 
@@ -134,7 +134,7 @@
 
       <el-table-column label="图标" width="100" align="center">
         <template slot-scope="scope">
-          <i :class="scope.row.icon"></i>
+          <i :class="scope.row.icon"/>
         </template>
       </el-table-column>
 
@@ -146,7 +146,7 @@
 
       <el-table-column label="是否显示" width="100" align="center">
         <template slot-scope="scope">
-          <el-tag v-for="item in yesNoDictList" :key="item.uid" v-if="scope.row.isShow == item.dictValue" :type="item.listClass">{{item.dictLabel}}</el-tag>
+          <el-tag v-for="item in yesNoDictList" v-if="scope.row.isShow == item.dictValue" :key="item.uid" :type="item.listClass">{{ item.dictLabel }}</el-tag>
         </template>
       </el-table-column>
 
@@ -171,71 +171,68 @@
       </el-table-column>
 
       <el-table-column label="操作" fixed="right" min-width="270">
-        <template slot-scope="scope">
-
-        </template>
+        <template slot-scope="scope"/>
       </el-table-column>
     </el-table>
 
-
     <!-- 添加或修改对话框 -->
     <el-dialog :title="title" :visible.sync="dialogFormVisible">
-      <el-form :model="form" :rules="rules" ref="form">
-        <el-form-item label="接口名称" :label-width="formLabelWidth" prop="name">
-          <el-input v-model="form.name" placeholder="请输入接口名称" auto-complete="off"></el-input>
+      <el-form ref="form" :model="form" :rules="rules">
+        <el-form-item :label-width="formLabelWidth" label="接口名称" prop="name">
+          <el-input v-model="form.name" placeholder="请输入接口名称" auto-complete="off"/>
         </el-form-item>
 
-        <el-form-item label="菜单类型" :label-width="formLabelWidth" prop="menuType">
+        <el-form-item :label-width="formLabelWidth" label="菜单类型" prop="menuType">
           <el-radio-group v-model="form.menuType" size="small" disabled>
-            <el-radio v-for="item in menuTypeDictList" :key="item.uid" :label="parseInt(item.dictValue)" border>{{item.dictLabel}}</el-radio>
+            <el-radio v-for="item in menuTypeDictList" :key="item.uid" :label="parseInt(item.dictValue)" border>{{ item.dictLabel }}</el-radio>
           </el-radio-group>
         </el-form-item>
 
-        <el-form-item label="菜单等级" :label-width="formLabelWidth" prop="menuLevel">
+        <el-form-item :label-width="formLabelWidth" label="菜单等级" prop="menuLevel">
           <el-select v-model="form.menuLevel" placeholder="请选择" disabled>
             <el-option
               v-for="item in menuLevelDictList"
               :key="item.uid"
               :label="item.dictLabel"
               :value="parseInt(item.dictValue)"
-            ></el-option>
+            />
           </el-select>
         </el-form-item>
 
         <!-- 用于接口 -->
         <el-form-item
           v-if="form.menuType == 1"
-          label="父菜单名"
           :label-width="formLabelWidth"
+          label="父菜单名"
         >
           <el-cascader
             :options="options"
-            placeholder="请选择父菜单"
             v-model="buttonParentUid"
             :props="{ checkStrictly: false }"
-            clearable></el-cascader>
+            placeholder="请选择父菜单"
+            clearable/>
         </el-form-item>
 
-        <el-form-item label="接口介绍" :label-width="formLabelWidth" prop="summary">
-          <el-input v-model="form.summary" placeholder="请输入接口简介" auto-complete="off"></el-input>
+        <el-form-item :label-width="formLabelWidth" label="接口介绍" prop="summary">
+          <el-input v-model="form.summary" placeholder="请输入接口简介" auto-complete="off"/>
         </el-form-item>
 
-        <el-form-item label="图标" :label-width="formLabelWidth" prop="icon" v-if="form.menuType == 0">
-          <el-input v-model="form.icon" auto-complete="off"></el-input>
+        <el-form-item v-if="form.menuType == 0" :label-width="formLabelWidth" label="图标" prop="icon">
+          <el-input v-model="form.icon" auto-complete="off"/>
         </el-form-item>
 
-        <el-form-item label="路由" :label-width="formLabelWidth" prop="url">
-          <el-input v-model="form.url" placeholder="路由对应的是前端router表中的路径" auto-complete="off"></el-input>
+        <el-form-item :label-width="formLabelWidth" label="路由" prop="url">
+          <el-input v-model="form.url" placeholder="路由对应的是前端router表中的路径" auto-complete="off"/>
         </el-form-item>
 
-        <el-form-item label="是否显示" :label-width="formLabelWidth" prop="isShow">
+        <el-form-item :label-width="formLabelWidth" label="是否显示" prop="isShow">
           <el-radio-group v-model="form.isShow" size="small">
-            <el-radio v-for="item in yesNoDictList" :key="item.uid" :label="parseInt(item.dictValue)" border>{{item.dictLabel}}</el-radio>
+            <el-radio v-for="item in yesNoDictList" :key="item.uid" :label="parseInt(item.dictValue)" border>{{ item.dictLabel }}</el-radio>
           </el-radio-group>
         </el-form-item>
 
-        <el-form-item label="排序" :label-width="formLabelWidth" prop="sort">
-          <el-input v-model="form.sort" auto-complete="off"></el-input>
+        <el-form-item :label-width="formLabelWidth" label="排序" prop="sort">
+          <el-input v-model="form.sort" auto-complete="off"/>
         </el-form-item>
 
       </el-form>
@@ -255,91 +252,91 @@ import {
   editMenu,
   deleteMenu,
   stickMenu
-} from "@/api/categoryMenu";
-import {getListByDictTypeList} from "@/api/sysDictData"
-import { formatData } from "@/utils/webUtils";
+} from '@/api/categoryMenu'
+import { getListByDictTypeList } from '@/api/sysDictData'
+import { formatData } from '@/utils/webUtils'
 export default {
   data() {
     return {
-      showHeader: false, //是否显示表头
+      showHeader: false, // 是否显示表头
       tableData: [],
       keyword: [],
-      menuLevel: "",
+      menuLevel: '',
       currentPage: 1,
       pageSize: 10,
-      total: 0, //总数量
-      title: "增加接口",
-      dialogFormVisible: false, //控制弹出框
-      formLabelWidth: "120px",
+      total: 0, // 总数量
+      title: '增加接口',
+      dialogFormVisible: false, // 控制弹出框
+      formLabelWidth: '120px',
       isEditForm: false,
-      menuLevelDictList: [], //菜单等级字典
+      menuLevelDictList: [], // 菜单等级字典
       yesNoDictList: [], // 是否字典
-      menuTypeDictList: [], //菜单类型字典
+      menuTypeDictList: [], // 菜单类型字典
       yesNoDefault: null, // 是否 默认值
       menuTypeDefault: null, // 菜单类型默认值
       buttonParentUid: [], // 选中的button父UID
       form: {
         uid: null,
-        name: "",
-        summary: "",
-        icon: "",
-        url: "",
+        name: '',
+        summary: '',
+        icon: '',
+        url: '',
         sort: 0
       },
       loading: false,
       rules: {
         name: [
-          {required: true, message: '菜单名称不能为空', trigger: 'blur'},
-          {min: 1, max: 20, message: '长度在1到20个字符'},
+          { required: true, message: '菜单名称不能为空', trigger: 'blur' },
+          { min: 1, max: 20, message: '长度在1到20个字符' }
         ],
         menuLevel: [
-          {required: true, message: '菜单等级不能为空', trigger: 'blur'}
+          { required: true, message: '菜单等级不能为空', trigger: 'blur' }
         ],
         parentUid: [
-          {required: true, message: '父菜单名不能为空', trigger: 'blur'}
+          { required: true, message: '父菜单名不能为空', trigger: 'blur' }
         ],
         summary: [
-          {required: true, message: '菜单简介不能为空', trigger: 'blur'}
+          { required: true, message: '菜单简介不能为空', trigger: 'blur' }
         ],
         icon: [
-          {required: true, message: '图标不能为空', trigger: 'blur'}
+          { required: true, message: '图标不能为空', trigger: 'blur' }
         ],
         url: [
-          {required: true, message: 'URL不能为空', trigger: 'blur'}
+          { required: true, message: 'URL不能为空', trigger: 'blur' }
         ],
         isShow: [
-          {required: true, message: '显示字段不能为空', trigger: 'blur'}
+          { required: true, message: '显示字段不能为空', trigger: 'blur' }
         ],
         sort: [
-          {required: true, message: '排序字段不能为空', trigger: 'blur'},
-          {pattern: /^[0-9]\d*$/, message: '排序字段只能为自然数'},
-        ],
+          { required: true, message: '排序字段不能为空', trigger: 'blur' },
+          { pattern: /^[0-9]\d*$/, message: '排序字段只能为自然数' }
+        ]
       },
       options: []
-    };
+    }
   },
   created() {
     // 得到菜单列表
     this.menuList()
-    this.getDictList();
-    this.buttonList();
+    this.getDictList()
+    this.buttonList()
   },
   methods: {
     menuList: function() {
       getAllMenu().then(response => {
         if (response.code === 200) {
-          let tableData = response.data;
-          let options = []
-          for(let a=0; a<tableData.length; a++) {
-            let parent = {}
-            parent.label = tableData[a].name;
-            parent.value = tableData[a].uid;
-            let childData = tableData[a].childCategoryMenu
-            let childList = []
-            for(let b=0; b<childData.length; b++) {
-              let child = {}
-              child.label = childData[b].name;
-              child.value = childData[b].uid;
+          const tableData = response.data
+          const options = []
+          for (let a = 0; a < tableData.length; a++) {
+            const parent = {}
+            parent.label = tableData[a].name
+            parent.value = tableData[a].uid
+            const childData = tableData[a].childCategoryMenu
+            const childList = []
+            for (let b = 0; b < childData.length; b++) {
+              const child = {}
+              child.label = childData[b].name
+              child.value = childData[b].uid
               childList.push(child)
             }
             parent.children = childList
@@ -347,30 +344,29 @@ export default {
           }
           this.options = options
         }
-      });
+      })
     },
     buttonList: function() {
-      var params = {};
+      var params = {}
       var keyword = this.keyword
-      if(keyword.length > 0) {
+      if (keyword.length > 0) {
         // 选取最后一个元素
         params.keyword = keyword[keyword.length - 1]
       }
       getButtonAll(params).then(response => {
         if (response.code === 200) {
-          this.tableData = response.data;
+          this.tableData = response.data
         }
-      });
+      })
     },
     /**
      * 字典查询
      */
-    getDictList: function () {
-      var dictTypeList =  ['sys_menu_level', 'sys_yes_no', 'sys_menu_type']
+    getDictList: function() {
+      var dictTypeList = ['sys_menu_level', 'sys_yes_no', 'sys_menu_type']
       getListByDictTypeList(dictTypeList).then(response => {
         if (response.code === 200) {
-
-          var dictMap = response.data;
+          var dictMap = response.data
 
           this.menuLevelDictList = dictMap.sys_menu_level.list
 
@@ -378,143 +374,142 @@ export default {
 
           this.menuTypeDictList = dictMap.sys_menu_type.list
 
-          if(dictMap.sys_yes_no.defaultValue) {
-            this.yesNoDefault = parseInt(dictMap.sys_yes_no.defaultValue);
+          if (dictMap.sys_yes_no.defaultValue) {
+            this.yesNoDefault = parseInt(dictMap.sys_yes_no.defaultValue)
           }
 
-          if(dictMap.sys_menu_type.defaultValue) {
-            this.menuTypeDefault = parseInt(dictMap.sys_menu_type.defaultValue);
+          if (dictMap.sys_menu_type.defaultValue) {
+            this.menuTypeDefault = parseInt(dictMap.sys_menu_type.defaultValue)
           }
-
         }
-      });
+      })
     },
     getFormObject: function() {
       var formObject = {
         uid: null,
-        name: "",
-        summary: "",
-        icon: "",
-        url: "",
+        name: '',
+        summary: '',
+        icon: '',
+        url: '',
         sort: 0,
         menuLevel: 3,
         isShow: this.yesNoDefault,
         isJumpExternalUrl: 0,
         menuType: 1
-      };
-      return formObject;
+      }
+      return formObject
     },
     handleFind: function() {
-      this.buttonList();
+      this.buttonList()
     },
     handleAdd: function() {
-      this.title = "增加接口"
-      this.dialogFormVisible = true;
-      this.form = this.getFormObject();
-      this.isEditForm = false;
+      this.title = '增加接口'
+      this.dialogFormVisible = true
+      this.form = this.getFormObject()
+      this.isEditForm = false
     },
     handleEdit: function(parentRow, row) {
-      this.dialogFormVisible = true;
-      this.isEditForm = true;
+      this.dialogFormVisible = true
+      this.isEditForm = true
       // 设置级联的父菜单名
       var parentUid = []
       parentUid.push(parentRow.parentUid)
       parentUid.push(parentRow.uid)
       this.buttonParentUid = parentUid
-      this.title = "编辑接口"
-      this.form = row;
+      this.title = '编辑接口'
+      this.form = row
     },
     handleStick: function(row) {
-      this.$confirm("此操作将会把该接口放到首位, 是否继续?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
+      this.$confirm('此操作将会把该接口放到首位, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
       })
         .then(() => {
-          let params = {}
+          const params = {}
           params.uid = row.uid
           stickMenu(params).then(response => {
             if (response.code === 200) {
-              this.buttonList();
+              this.buttonList()
               this.$commonUtil.message.success(response.message)
             } else {
               this.$commonUtil.message.error(response.message)
             }
-          });
+          })
         })
         .catch(() => {
-          this.$commonUtil.message.info("已取消置顶")
-        });
+          this.$commonUtil.message.info('已取消置顶')
+        })
     },
     handleDelete: function(row) {
-      var that = this;
-      this.$confirm("此操作将把接口删除, 是否继续?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
+      var that = this
+      this.$confirm('此操作将把接口删除, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
       })
         .then(() => {
-          let params = {}
+          const params = {}
           params.uid = row.uid
           deleteMenu(params).then(response => {
-            if(response.code === 200) {
+            if (response.code === 200) {
               this.$commonUtil.message.success(response.message)
             } else {
               this.$commonUtil.message.error(response.message)
             }
-            that.buttonList();
-          });
+            that.buttonList()
+          })
         })
         .catch(() => {
-          this.$commonUtil.message.info("已取消删除")
-        });
+          this.$commonUtil.message.info('已取消删除')
+        })
     },
 
     submitForm: function() {
       this.$refs.form.validate((valid) => {
-        if(!valid) {
-          console.log("校验失败")
+        if (!valid) {
+          console.log('校验失败')
         } else {
           // 如果菜单类型是 接口，那么设置菜单等级为 3
-          let menuType = this.form.menuType
-          if(menuType == 1) {
+          const menuType = this.form.menuType
+          if (menuType == 1) {
             this.form.menuLevel = 3
           }
-          let buttonParentUid = this.buttonParentUid
-          if(buttonParentUid.length > 0) {
+          const buttonParentUid = this.buttonParentUid
+          if (buttonParentUid.length > 0) {
             // 选取最后一个元素
             this.form.parentUid = buttonParentUid[buttonParentUid.length - 1]
           } else {
-            this.$commonUtil.message.error("请选中父菜单")
-            return;
+            this.$commonUtil.message.error('请选中父菜单')
+            return
           }
 
           if (this.isEditForm) {
             editMenu(this.form).then(response => {
               if (response.code === 200) {
                 this.$commonUtil.message.success(response.message)
-                this.dialogFormVisible = false;
-                this.buttonList();
+                this.dialogFormVisible = false
+                this.buttonList()
               } else {
                 this.$commonUtil.message.error(response.message)
               }
-            });
+            })
           } else {
             addMenu(this.form).then(response => {
               if (response.code === 200) {
                 this.$commonUtil.message.success(response.message)
-                this.dialogFormVisible = false;
-                this.buttonList();
+                this.dialogFormVisible = false
+                this.buttonList()
               } else {
                 this.$commonUtil.message.error(response.message)
               }
-            });
+            })
           }
         }
       })
     }
   }
-};
+}
 </script>
 <style>
   .demo-table-expand {

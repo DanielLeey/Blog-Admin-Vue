@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function getSubjectList(params) {
   return request({
-    url: process.env.ADMIN_API + '/subject/getList',
+    url: process.env.ARTICLE_API + '/subject/getList',
     method: 'post',
     data: params
   })
@@ -10,7 +10,7 @@ export function getSubjectList(params) {
 
 export function addSubject(params) {
   return request({
-    url: process.env.ADMIN_API + '/subject/add',
+    url: process.env.ARTICLE_API + '/subject/add',
     method: 'post',
     data: params
   })
@@ -18,7 +18,7 @@ export function addSubject(params) {
 
 export function editSubject(params) {
   return request({
-    url: process.env.ADMIN_API + '/subject/edit',
+    url: process.env.ARTICLE_API + '/subject/edit',
     method: 'post',
     data: params
   })
@@ -26,7 +26,7 @@ export function editSubject(params) {
 
 export function deleteBatchSubject(params) {
   return request({
-    url: process.env.ADMIN_API + '/subject/deleteBatch',
+    url: process.env.ARTICLE_API + '/subject/deleteBatch',
     method: 'post',
     data: params
   })

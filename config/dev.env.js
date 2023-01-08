@@ -8,6 +8,7 @@ module.exports = merge(prodEnv, {
   //开发环境
   GATEWAY_API: '"http://localhost:8000/gateway"',
   ADMIN_API: '"http://localhost:8000/admin"',
+  ARTICLE_API: '"http://localhost:8000/article"',
   PICTURE_API: '"http://localhost:8607/mogu-picture"',
   WEB_API: '"http://localhost:8607/mogu-web"',
   Search_API: '"http://localhost:8607/mogu-search"',

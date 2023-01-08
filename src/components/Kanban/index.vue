@@ -6,8 +6,8 @@
     <draggable
       :list="list"
       v-bind="$attrs"
-      class="board-column-content"
       :set-data="setData"
+      class="board-column-content"
       @change="change"
     >
       <div v-for="element in list" :key="element.uid" class="board-item">
@@ -53,17 +53,17 @@ export default {
       dataTransfer.setData('Text', '')
     },
 
-    //evt里面有两个值，一个evt.added 和evt.removed  可以分别知道移动元素的ID和删除元素的ID
-    change: function (evt) {
-      this.$emit("change", this.list)
+    // evt里面有两个值，一个evt.added 和evt.removed  可以分别知道移动元素的ID和删除元素的ID
+    change: function(evt) {
+      this.$emit('change', this.list)
     },
     subStr(str, index) {
-      if(str.length < index){
-        return str;
+      if (str.length < index) {
+        return str
       } else {
-        return str.substring(0, index) + "..."
+        return str.substring(0, index) + '...'
       }
-    },
+    }
   }
 }
 </script>

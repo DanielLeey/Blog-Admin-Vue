@@ -26,7 +26,6 @@ export default {
           var contributeDate = response.data.contributeDate
 
           var blogContributeCount = response.data.blogContributeCount
-          console.log('blogContributeCount: ', blogContributeCount)
           const chart = echarts.init(document.getElementById('container'))
 
           const option = {

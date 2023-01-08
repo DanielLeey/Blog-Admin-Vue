@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function getBlogSortList(params) {
   return request({
-    url: process.env.ADMIN_API + '/blogSort/getList',
+    url: process.env.ARTICLE_API + '/blogSort/getList',
     method: 'post',
     data: params
   })
@@ -10,7 +10,7 @@ export function getBlogSortList(params) {
 
 export function addBlogSort(params) {
   return request({
-    url: process.env.ADMIN_API + '/blogSort/add',
+    url: process.env.ARTICLE_API + '/blogSort/add',
     method: 'post',
     data: params
   })
@@ -18,7 +18,7 @@ export function addBlogSort(params) {
 
 export function editBlogSort(params) {
   return request({
-    url: process.env.ADMIN_API + '/blogSort/edit',
+    url: process.env.ARTICLE_API + '/blogSort/edit',
     method: 'post',
     data: params
   })
@@ -26,7 +26,7 @@ export function editBlogSort(params) {
 
 export function deleteBatchBlogSort(params) {
   return request({
-    url: process.env.ADMIN_API + '/blogSort/deleteBatch',
+    url: process.env.ARTICLE_API + '/blogSort/deleteBatch',
     method: 'post',
     data: params
   })
@@ -34,7 +34,7 @@ export function deleteBatchBlogSort(params) {
 
 export function stickBlogSort(params) {
   return request({
-    url: process.env.ADMIN_API + '/blogSort/stick',
+    url: process.env.ARTICLE_API + '/blogSort/stick',
     method: 'post',
     data: params
   })
@@ -42,7 +42,7 @@ export function stickBlogSort(params) {
 
 export function blogSortByClickCount(params) {
   return request({
-    url: process.env.ADMIN_API + '/blogSort/blogSortByClickCount',
+    url: process.env.ARTICLE_API + '/blogSort/blogSortByClickCount',
     method: 'post',
     params
   })
@@ -50,7 +50,7 @@ export function blogSortByClickCount(params) {
 
 export function blogSortByCite(params) {
   return request({
-    url: process.env.ADMIN_API + '/blogSort/blogSortByCite',
+    url: process.env.ARTICLE_API + '/blogSort/blogSortByCite',
     method: 'post',
     params
   })

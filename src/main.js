@@ -28,7 +28,7 @@ Vue.component('RightToolbar', RightToolbar)
 
 // 添加粒子特效
 import VueParticles from 'vue-particles'
-
+import CKEDITOR from 'CKEDITOR'
 // 因引入CDN加速，无需再次引入
 // Vue.use(ElementUI, { locale })
 
@@ -40,6 +40,7 @@ Object.defineProperty(Vue.prototype, '$xss', {
 
 Vue.use(VueParticles)
 Vue.use(prototype)
+Vue.use(CKEDITOR)
 Vue.config.productionTip = false
 
 new Vue({

@@ -4,20 +4,20 @@
     <div class="filter-container" style="margin: 10px 0 10px 0;">
       <el-select
         v-model="adminKeyword"
+        :remote-method="adminRemoteMethod"
+        :loading="loading"
         filterable
         clearable
         remote
         reserve-keyword
         placeholder="请输入管理员名"
-        :remote-method="adminRemoteMethod"
-        :loading="loading"
       >
         <el-option
           v-for="item in adminOptions"
           :key="item.uid"
           :label="item.userName"
           :value="item.uid"
-        ></el-option>
+        />
       </el-select>
 
       <el-select v-model="roleKeyword" placeholder="请选择" style="width:150px" clearable>
@@ -26,18 +26,18 @@
           :key="item.uid"
           :label="item.roleName"
           :value="item.uid"
-        ></el-option>
+        />
       </el-select>
 
       <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFind">查找</el-button>
-      <el-button class="filter-item" type="primary" @click="handleAdd" icon="el-icon-edit">添加权限</el-button>
+      <el-button class="filter-item" type="primary" icon="el-icon-edit" @click="handleAdd">添加权限</el-button>
     </div>
 
     <el-table :data="tableData" style="width: 100%">
-      <el-table-column type="selection"></el-table-column>
+      <el-table-column type="selection"/>
       <el-table-column label="序号" width="60">
         <template slot-scope="scope">
-          <span>{{scope.$index + 1}}</span>
+          <span>{{ scope.$index + 1 }}</span>
         </template>
       </el-table-column>
 
@@ -75,8 +75,8 @@
 
       <el-table-column label="操作" fixed="right" min-width="230">
         <template slot-scope="scope">
-          <el-button @click="handleEdit(scope.row)" type="primary" size="small">编辑</el-button>
-          <el-button @click="handleDelete(scope.row)" type="danger" size="small">删除</el-button>
+          <el-button type="primary" size="small" @click="handleEdit(scope.row)">编辑</el-button>
+          <el-button type="danger" size="small" @click="handleDelete(scope.row)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -84,45 +84,45 @@
     <!--分页-->
     <div class="block">
       <el-pagination
-        @current-change="handleCurrentChange"
         :current-page.sync="currentPage"
         :page-size="pageSize"
-        layout="total, prev, pager, next, jumper"
         :total="total"
-      ></el-pagination>
+        layout="total, prev, pager, next, jumper"
+        @current-change="handleCurrentChange"
+      />
     </div>
 
     <!-- 添加或修改对话框 -->
     <el-dialog :title="title" :visible.sync="dialogFormVisible">
       <el-form :model="form">
-        <el-form-item label="管理员名" :label-width="formLabelWidth">
+        <el-form-item :label-width="formLabelWidth" label="管理员名">
           <el-select
             v-model="form.adminUid"
+            :remote-method="adminRemoteMethod"
+            :loading="loading"
             filterable
             clearable
             remote
             reserve-keyword
             placeholder="请输入管理员名"
-            :remote-method="adminRemoteMethod"
-            :loading="loading"
           >
             <el-option
               v-for="item in adminOptions"
               :key="item.uid"
               :label="item.userName"
               :value="item.uid"
-            ></el-option>
+            />
           </el-select>
         </el-form-item>
 
-        <el-form-item label="角色名" :label-width="formLabelWidth">
+        <el-form-item :label-width="formLabelWidth" label="角色名">
           <el-select v-model="form.roleUid" placeholder="请选择" style="width:150px">
             <el-option
               v-for="item in roleOptions"
               :key="item.uid"
               :label="item.roleName"
               :value="item.uid"
-            ></el-option>
+            />
           </el-select>
         </el-form-item>
 
@@ -141,193 +141,190 @@ import {
   addAdminRole,
   editAdminRole,
   deleteAdminRole
-} from "@/api/adminRole";
+} from '@/api/adminRole'
 
-import { getRoleList } from "@/api/role";
-import { getAdminList } from "@/api/admin";
+import { getRoleList } from '@/api/role'
+import { getAdminList } from '@/api/admin'
 
-import { formatData } from "@/utils/webUtils";
+import { formatData } from '@/utils/webUtils'
 export default {
   data() {
     return {
-      adminOptions: [], //管理员候选框
-      roleOptions: [], //角色候选框
-      loading: false, //搜索框加载状态
+      adminOptions: [], // 管理员候选框
+      roleOptions: [], // 角色候选框
+      loading: false, // 搜索框加载状态
 
       tableData: [],
-      adminKeyword: "",
-      roleKeyword: "",
+      adminKeyword: '',
+      roleKeyword: '',
       currentPage: 1,
       pageSize: 10,
-      total: 0, //总数量
-      title: "增加分类",
-      dialogFormVisible: false, //控制弹出框
-      formLabelWidth: "120px",
+      total: 0, // 总数量
+      title: '增加分类',
+      dialogFormVisible: false, // 控制弹出框
+      formLabelWidth: '120px',
       isEditForm: false,
       form: {
         uid: null,
-        content: "",
-        sortName: ""
+        content: '',
+        sortName: ''
       }
-    };
+    }
   },
   created() {
-    this.adminRoleList();
-    this.roleList();
+    this.adminRoleList()
+    this.roleList()
   },
   methods: {
-    adminRoleList: function () {
-      var params = new URLSearchParams();
-      params.append("adminUid", this.adminKeyword);
-      params.append("roleUid", this.roleKeyword);
-      params.append("currentPage", this.currentPage);
-      params.append("pageSize", this.pageSize);
+    adminRoleList: function() {
+      var params = new URLSearchParams()
+      params.append('adminUid', this.adminKeyword)
+      params.append('roleUid', this.roleKeyword)
+      params.append('currentPage', this.currentPage)
+      params.append('pageSize', this.pageSize)
       getAdminRoleList(params).then(response => {
-        this.tableData = response.data.records;
-        this.currentPage = response.data.current;
-        this.pageSize = response.data.size;
-        this.total = response.data.total;
+        this.tableData = response.data.records
+        this.currentPage = response.data.current
+        this.pageSize = response.data.size
+        this.total = response.data.total
 
-        //初始化选项列表
-        var data = this.tableData;
+        // 初始化选项列表
+        var data = this.tableData
         for (let a = 0; a < data.length; a++) {
-          let tag1 = false;
-          let tag2 = false;
+          let tag1 = false
+          let tag2 = false
 
           this.adminOptions.forEach(element => {
             if (element.uid == data[a].admin.uid) {
-              tag1 = true;
+              tag1 = true
             }
-          });
+          })
 
           this.roleOptions.forEach(element => {
             if (element.uid == data[a].role.uid) {
-              tag2 = true;
+              tag2 = true
             }
-          });
+          })
 
           if (!tag1) {
-            this.adminOptions.push(data[a].admin);
+            this.adminOptions.push(data[a].admin)
           }
           if (!tag2) {
-            this.roleOptions.push(data[a].role);
+            this.roleOptions.push(data[a].role)
           }
         }
-
-      });
+      })
     },
-    getFormObject: function () {
+    getFormObject: function() {
       var formObject = {
         uid: null,
         content: null,
         sortName: null
-      };
-      return formObject;
+      }
+      return formObject
     },
-    handleFind: function () {
-      this.adminRoleList();
+    handleFind: function() {
+      this.adminRoleList()
     },
-    handleAdd: function () {
-      this.dialogFormVisible = true;
-      this.form = this.getFormObject();
-      this.isEditForm = false;
+    handleAdd: function() {
+      this.dialogFormVisible = true
+      this.form = this.getFormObject()
+      this.isEditForm = false
     },
-    handleEdit: function (row) {
-      this.dialogFormVisible = true;
-      this.isEditForm = true;
-      this.form = row;
+    handleEdit: function(row) {
+      this.dialogFormVisible = true
+      this.isEditForm = true
+      this.form = row
     },
 
-    //管理员远程搜索函数
-    adminRemoteMethod: function (query) {
-      if (query !== "") {
-        var params = new URLSearchParams();
-        params.append("keyword", query);
+    // 管理员远程搜索函数
+    adminRemoteMethod: function(query) {
+      if (query !== '') {
+        var params = new URLSearchParams()
+        params.append('keyword', query)
         getAdminList(params).then(response => {
-          this.adminOptions = response.data.records;
-        });
+          this.adminOptions = response.data.records
+        })
       } else {
-        this.adminOptions = [];
+        this.adminOptions = []
       }
     },
 
-    //角色远程搜索函数
-    roleList: function () {
-
-      var params = {};
-      params.currentPage = 1;
-      params.pageSize = 10;
+    // 角色远程搜索函数
+    roleList: function() {
+      var params = {}
+      params.currentPage = 1
+      params.pageSize = 10
 
       getRoleList(params).then(response => {
-        this.roleOptions = response.data.records;
-      });
-
+        this.roleOptions = response.data.records
+      })
     },
 
-    handleDelete: function (row) {
-      var that = this;
-      this.$confirm("此操作将把分类删除, 是否继续?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
+    handleDelete: function(row) {
+      var that = this
+      this.$confirm('此操作将把分类删除, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
       })
         .then(() => {
-          let params = new URLSearchParams();
-          params.append("uid", row.uid);
+          const params = new URLSearchParams()
+          params.append('uid', row.uid)
           deleteAdminRole(params).then(response => {
             this.$message({
-              type: "success",
+              type: 'success',
               message: response.data
-            });
-            that.adminRoleList();
-          });
+            })
+            that.adminRoleList()
+          })
         })
         .catch(() => {
           this.$message({
-            type: "info",
-            message: "已取消删除"
-          });
-        });
+            type: 'info',
+            message: '已取消删除'
+          })
+        })
     },
-    handleCurrentChange: function (val) {
-      this.currentPage = val;
-      this.adminRoleList();
+    handleCurrentChange: function(val) {
+      this.currentPage = val
+      this.adminRoleList()
     },
-    submitForm: function () {
+    submitForm: function() {
       if (this.isEditForm) {
         editAdminRole(this.form).then(response => {
           if (response.code === 200) {
             this.$message({
-              type: "success",
+              type: 'success',
               message: response.data
-            });
-            this.dialogFormVisible = false;
-            this.adminRoleList();
+            })
+            this.dialogFormVisible = false
+            this.adminRoleList()
           } else {
             this.$message({
-              type: "error",
+              type: 'error',
               message: response.data
-            });
+            })
           }
-        });
+        })
       } else {
         addAdminRole(this.form).then(response => {
           if (response.code === 200) {
             this.$message({
-              type: "success",
+              type: 'success',
               message: response.data
-            });
-            this.dialogFormVisible = false;
-            this.adminRoleList();
+            })
+            this.dialogFormVisible = false
+            this.adminRoleList()
           } else {
             this.$message({
-              type: "error",
+              type: 'error',
               message: response.data
-            });
+            })
           }
-        });
+        })
       }
     }
   }
-};
+}
 </script>

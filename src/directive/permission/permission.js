@@ -3,10 +3,10 @@ import store from '@/store'
 export default {
   inserted(el, binding, vnode) {
     const { value } = binding
-    if(store.getters.buttonMap.size == undefined) {
+    if (store.getters.buttonMap.size === undefined) {
       // 初始加载的时候，还没有写入到vuex中，因此使用setInterval在下次dom更新时生效
-      let intervalID = setInterval(() => {
-        try{
+      const intervalID = setInterval(() => {
+        try {
           // 得到按钮上的路径
           const buttonMap = store.getters.buttonMap
           if (value && value.length > 0) {
@@ -18,13 +18,13 @@ export default {
             }
           }
           // 清空触发器
-          if(store.getters.buttonMap.size != undefined) {
-            clearInterval(intervalID);
+          if (store.getters.buttonMap.size !== undefined) {
+            clearInterval(intervalID)
           }
         } catch (e) {
-            console.log("vuex中的PathMap暂未初始化")
+          console.log('vuex中的PathMap暂未初始化')
         }
-      },500);
+      }, 500)
     } else {
       // 得到按钮上的路径
       const buttonMap = store.getters.buttonMap
