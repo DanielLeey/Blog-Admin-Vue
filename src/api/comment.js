@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function getCommentList(params) {
   return request({
-    url: process.env.ADMIN_API + '/comment/getList',
+    url: process.env.ARTICLE_API + '/comment/getList',
     method: 'post',
     data: params
   })
@@ -10,7 +10,7 @@ export function getCommentList(params) {
 
 export function addComment(params) {
   return request({
-    url: process.env.ADMIN_API + '/comment/add',
+    url: process.env.ARTICLE_API + '/comment/add',
     method: 'post',
     data: params
   })
@@ -18,7 +18,7 @@ export function addComment(params) {
 
 export function editComment(params) {
   return request({
-    url: process.env.ADMIN_API + '/comment/edit',
+    url: process.env.ARTICLE_API + '/comment/edit',
     method: 'post',
     data: params
   })
@@ -26,7 +26,7 @@ export function editComment(params) {
 
 export function deleteComment(params) {
   return request({
-    url: process.env.ADMIN_API + '/comment/delete',
+    url: process.env.ARTICLE_API + '/comment/delete',
     method: 'post',
     data: params
   })
@@ -34,7 +34,7 @@ export function deleteComment(params) {
 
 export function deleteBatchComment(params) {
   return request({
-    url: process.env.ADMIN_API + '/comment/deleteBatch',
+    url: process.env.ARTICLE_API + '/comment/deleteBatch',
     method: 'post',
     data: params
   })

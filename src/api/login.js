@@ -27,7 +27,7 @@ export function getMenu(token) {
 
 export function logout() {
   return request({
-    url: process.env.ADMIN_API + '/auth/logout',
+    url: process.env.GATEWAY_API + '/auth/logout',
     method: 'post'
   })
 }
